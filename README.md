@@ -1,4 +1,4 @@
-<img align="right" src="./docs/icon.png" alt="ML4Fz" width="30%">
+<img align="right" src="./docs/assets/icon.png" alt="ML4Fz" width="30%">
 
 <h1>ML4Fz</h1>
 <p>ML-assisted Windows DLL Fuzzer</p>
@@ -17,10 +17,6 @@ ML4Fz is a ML-assisted extensible Windows DLL fuzzer **designed to identify <u>p
 ```bash
 
 ```
-
-## References
-* [https://www.fuzzingbook.org/](https://www.fuzzingbook.org/)
-* [https://github.com/aflplusplus/aflplusplus](https://github.com/aflplusplus/aflplusplus)
 
 ## Credits
 * Font: [HACKED by DavidLibeau](https://www.fontspace.com/hacked-font-f28425)
