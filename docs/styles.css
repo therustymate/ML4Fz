@@ -1,0 +1,6182 @@
+@font-face {
+    font-family: "HACKED";
+    src: url("./assets/HACKED.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+    --bg: #0b1117;
+    --chrome: #101a22;
+    --panel: #0f171e;
+    --panel-dark: #090f14;
+    --ink: #dff7ff;
+    --muted: #6f8993;
+    --line: #20313b;
+    --line-soft: #19272f;
+    --cyan-blue: #4de7ff;
+    --cyan: var(--cyan-blue);
+    --green: var(--cyan-blue);
+    --yellow: var(--cyan-blue);
+    --orange: var(--cyan-blue);
+    --mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+    --sans: "Chakra Petch", "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #060a0e;
+    color: var(--ink);
+    font-family: var(--sans);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+img {
+    display: block;
+}
+
+::selection {
+    background: var(--cyan-blue);
+    color: white;
+}
+
+.app-shell {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.brand img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.brand div {
+    display: grid;
+    gap: 2px;
+}
+
+.brand strong {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.brand span {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.site-navbar {
+    min-height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 260px 1fr auto;
+    align-items: center;
+    padding: 0 22px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(11, 17, 23, 0.96);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.site-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+}
+
+.site-nav a,
+.repo-button,
+.eyebrow,
+.section-head span,
+.address,
+.type,
+.cfg-title,
+.console-head,
+.notes-grid article > span,
+.reference-table .address {
+    font-family: var(--mono);
+}
+
+.site-nav a {
+    position: relative;
+    color: #93a8b1;
+    font-size: 11px;
+}
+
+.site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -8px;
+    height: 1px;
+    background: var(--cyan);
+    transition: right 150ms ease;
+}
+
+.site-nav a:hover {
+    color: #d9f6ff;
+}
+
+.site-nav a:hover::after {
+    right: 0;
+}
+
+.repo-button {
+    min-height: 36px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #294651;
+    background: #101d25;
+    color: var(--cyan);
+    font-size: 11px;
+}
+
+.repo-button:hover {
+    border-color: var(--cyan);
+    background: #142b35;
+    color: white;
+}
+
+.main-view {
+    min-width: 0;
+    background: var(--bg);
+}
+
+.hero {
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-stage {
+    min-height: 780px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+        linear-gradient(rgba(77, 231, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 231, 255, 0.035) 1px, transparent 1px),
+        #0b1117;
+    background-size: 22px 22px;
+}
+
+.hero-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.05) 0%,
+            rgba(11, 17, 23, 0.12) 34%,
+            rgba(11, 17, 23, 0.46) 82%
+        );
+}
+
+.hero-disassembly {
+    width: min(1180px, calc(100% - 56px));
+    height: 640px;
+    position: absolute;
+    inset: 50% auto auto 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    opacity: 0.58;
+}
+
+.hero-wires,
+.cfg-wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.hero-wires path,
+.cfg-wires path {
+    fill: none;
+    stroke: #365965;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    shape-rendering: geometricPrecision;
+}
+
+.disasm-node,
+.cfg-node {
+    border: 1px solid #2a4652;
+    background: rgba(16, 27, 34, 0.94);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+}
+
+.disasm-node {
+    width: 300px;
+    position: absolute;
+}
+
+.entry-node {
+    width: 360px;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+
+.left-node {
+    left: 12%;
+    top: 250px;
+}
+
+.right-node {
+    right: 12%;
+    top: 250px;
+}
+
+.bottom-node {
+    width: 340px;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+}
+
+.node-title {
+    min-height: 32px;
+    padding: 0 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #27434d;
+    background: #17313d;
+}
+
+.node-title span,
+.node-title strong {
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.node-title span {
+    color: var(--orange);
+}
+
+.node-title strong {
+    color: var(--cyan-blue);
+    font-weight: 500;
+}
+
+.node-body {
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    row-gap: 5px;
+}
+
+.addr {
+    color: #4d6974;
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.node-body code {
+    color: #a7c1cb;
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.node-body code b {
+    color: var(--cyan);
+    font-weight: 500;
+}
+
+.hero-copy {
+    width: min(calc(100% - 72px), 920px);
+    position: relative;
+    z-index: 5;
+    padding: 32px;
+    border: 1px solid #2f5664;
+    background: rgba(8, 16, 22, 0.94);
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.48),
+        0 0 0 1px rgba(77, 231, 255, 0.025) inset;
+    backdrop-filter: blur(10px);
+}
+
+.hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(77, 231, 255, 0.16),
+            transparent 18%,
+            transparent 82%,
+            rgba(77, 231, 255, 0.12)
+        );
+    opacity: 0.35;
+}
+
+.eyebrow {
+    color: var(--cyan);
+    font-size: 10px;
+}
+
+.hero-copy h1 {
+    margin: 12px 0 14px;
+    font-size: clamp(42px, 5.5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+}
+
+.hero-copy h1 span {
+    font-size: clamp(42px, 5.5vw, 24px) !important;
+    color: var(--cyan-blue);
+}
+
+.hero-copy > p {
+    max-width: 760px;
+    margin: 0;
+    color: #809aa5;
+    line-height: 1.65;
+    font-size: 13px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.button {
+    min-height: 38px;
+    padding: 0 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #294651;
+    background: #101d25;
+    color: #bdd8e1;
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.button:hover {
+    border-color: var(--cyan-blue);
+    background: #142631;
+}
+
+.button.primary {
+    border-color: var(--cyan-blue);
+    background: var(--cyan-blue);
+    color: white;
+}
+
+.section {
+    padding: 72px 36px;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-head {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+    align-items: end;
+    margin-bottom: 26px;
+}
+
+.section-head span {
+    color: var(--orange);
+    font-size: 10px;
+}
+
+.section-head h2 {
+    margin: 6px 0 0;
+    font-size: clamp(28px, 3.4vw, 46px);
+    letter-spacing: -0.035em;
+}
+
+.section-head > p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 12px;
+}
+
+.analysis-table,
+.reference-table {
+    border: 1px solid var(--line);
+    background: var(--panel-dark);
+}
+
+.analysis-table a {
+    min-height: 62px;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: 92px 46px 1fr 1.3fr 20px;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 10px;
+}
+
+.analysis-table a:last-child,
+.reference-table a:last-child {
+    border-bottom: 0;
+}
+
+.analysis-table a:hover,
+.reference-table a:hover {
+    background: #10202a;
+}
+
+.address {
+    color: var(--green);
+    font-size: 10px;
+}
+
+.type {
+    color: var(--yellow);
+    font-size: 10px;
+}
+
+.analysis-table strong {
+    color: #c2dce5;
+    font-size: 11px;
+}
+
+.analysis-table small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.analysis-table b,
+.reference-table b {
+    color: var(--cyan);
+}
+
+
+.flow-board {
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(rgba(77, 231, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 231, 255, 0.025) 1px, transparent 1px),
+        #0a1117;
+    background-size: 22px 22px;
+}
+
+.flow-track {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr) 34px
+        minmax(0, 1fr) 34px
+        minmax(0, 1.15fr) 34px
+        minmax(0, 1fr) 34px
+        minmax(0, 1fr);
+    align-items: stretch;
+    padding: 24px;
+}
+
+.flow-step {
+    min-height: 245px;
+    padding: 18px;
+    border: 1px solid #2a4652;
+    background: rgba(16, 27, 34, 0.94);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: column;
+}
+
+.flow-step-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+}
+
+.flow-step-head span {
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+
+.flow-step-head small {
+    color: var(--green);
+    font-size: 10px;
+}
+
+.flow-step > strong {
+    margin-top: auto;
+    color: #d6f7ff;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flow-step > p {
+    margin: 10px 0 0;
+    color: #87a1ab;
+    line-height: 1.6;
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.flow-chevron {
+    display: grid;
+    place-items: center;
+    color: #4f7a86;
+    font-family: var(--mono);
+    font-size: 32px;
+    user-select: none;
+}
+
+.mutation-step {
+    border-color: var(--cyan-blue);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.075), transparent 52%),
+        rgba(16, 27, 34, 0.98);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.08);
+}
+
+.mutation-step .flow-step-head {
+    border-bottom-color: rgba(77, 231, 255, 0.24);
+}
+
+.mutation-step > strong {
+    color: var(--cyan);
+}
+
+.mutation-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.mutation-tags span {
+    padding: 5px 7px;
+    border: 1px solid #294651;
+    background: #0b171d;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.feedback-band {
+    min-height: 118px;
+    display: grid;
+    grid-template-columns: 64px minmax(250px, 1fr) auto 160px;
+    gap: 20px;
+    align-items: center;
+    padding: 18px 24px;
+    border-top: 1px solid var(--cyan-blue);
+    background:
+        linear-gradient(90deg, rgba(77, 231, 255, 0.08), transparent 55%),
+        #0d171c;
+}
+
+.feedback-icon {
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: 38px;
+    line-height: 1;
+}
+
+.feedback-copy {
+    display: grid;
+    gap: 7px;
+}
+
+.feedback-copy span {
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+
+.feedback-copy strong {
+    color: #c4e4eb;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.feedback-signals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.feedback-signals span {
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    background: #091218;
+    color: #8da7b0;
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.feedback-target {
+    min-height: 64px;
+    padding: 10px 12px;
+    border-left: 2px solid var(--cyan);
+    background: rgba(77, 231, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feedback-target small {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.feedback-target strong {
+    margin-top: 5px;
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: 13px;
+}
+
+@media (max-width: 1160px) {
+    .flow-track {
+        overflow-x: auto;
+        grid-template-columns:
+            220px 30px
+            220px 30px
+            250px 30px
+            220px 30px
+            220px;
+    }
+
+    .feedback-band {
+        grid-template-columns: 54px 1fr 160px;
+    }
+
+    .feedback-signals {
+        grid-column: 2 / 4;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 720px) {
+    .flow-track {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        overflow: visible;
+        padding: 16px;
+    }
+
+    .flow-step {
+        min-height: 190px;
+    }
+
+    .flow-chevron {
+        min-height: 28px;
+        transform: rotate(90deg);
+        font-size: 26px;
+    }
+
+    .feedback-band {
+        grid-template-columns: 44px 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .feedback-signals,
+    .feedback-target {
+        grid-column: 1 / 3;
+    }
+
+    .feedback-signals {
+        justify-content: flex-start;
+    }
+}
+
+.console {
+    border: 1px solid var(--line);
+    background: #070d11;
+}
+
+.console-head {
+    min-height: 38px;
+    padding: 0 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    background: #0e1921;
+}
+
+.console-head > div {
+    display: grid;
+    gap: 2px;
+}
+
+.console-head span {
+    color: #abc8d2;
+    font-size: 10px;
+}
+
+.console-head small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.console-head button {
+    border: 0;
+    background: transparent;
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.console pre {
+    margin: 0;
+    padding: 20px;
+    overflow: auto;
+    color: #9ebbc5;
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 1.85;
+}
+
+.console .prompt {
+    color: var(--cyan-blue);
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.notes-grid article {
+    min-height: 180px;
+    padding: 17px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-grid article > span {
+    color: var(--orange);
+    font-size: 10px;
+}
+
+.notes-grid strong {
+    margin-top: auto;
+    color: #c1dce5;
+    font-size: 14px;
+}
+
+.notes-grid p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+    font-size: 10px;
+}
+
+.reference-table a {
+    min-height: 58px;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: 100px 1fr 1.2fr 20px;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.reference-table strong {
+    color: #bdd8e1;
+    font-size: 11px;
+}
+
+.reference-table small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.status-bar {
+    min-height: 28px;
+    position: sticky;
+    bottom: 0;
+    z-index: 25;
+    display: grid;
+    grid-template-columns: 240px 1fr auto;
+    align-items: center;
+    border-top: 1px solid #05080b;
+    background: #0e1921;
+    box-shadow: inset 0 1px 0 var(--line);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.status-bar > div,
+.status-bar > a {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-bar > div:first-child {
+    border-right: 1px solid var(--line);
+}
+
+.status-bar > a {
+    border-left: 1px solid var(--line);
+    color: var(--cyan);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+}
+
+.status-bar strong {
+    color: #a7c2cc;
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .site-navbar {
+        grid-template-columns: 220px 1fr auto;
+        padding: 0 16px;
+    }
+
+    .site-nav {
+        gap: 14px;
+    }
+
+    .site-nav a {
+        font-size: 10px;
+    }
+
+    .hero-disassembly {
+        width: calc(100% - 28px);
+        opacity: 0.42;
+    }
+
+    .left-node {
+        left: 4%;
+    }
+
+    .right-node {
+        right: 4%;
+    }
+
+    .cfg-node {
+        width: 250px;
+    }
+
+    .node-generate {
+        left: calc(25% - 125px);
+    }
+
+    .node-mutate {
+        right: calc(25% - 125px);
+    }
+
+    .node-execute {
+        left: calc(38% - 125px);
+    }
+
+    .node-triage {
+        right: calc(38% - 125px);
+    }
+}
+
+@media (max-width: 720px) {
+    .site-navbar {
+        grid-template-columns: 1fr auto;
+        min-height: 64px;
+        padding: 0 14px;
+    }
+
+    .site-nav {
+        display: none;
+    }
+
+    .brand span {
+        display: none;
+    }
+
+    .repo-button {
+        min-height: 34px;
+        padding: 0 11px;
+    }
+
+    .hero-stage {
+        min-height: 870px;
+        align-items: end;
+        padding-bottom: 30px;
+    }
+
+    .hero-disassembly {
+        height: 530px;
+        top: 28px;
+        transform: translateX(-50%);
+        opacity: 0.32;
+    }
+
+    .hero-wires {
+        display: none;
+    }
+
+    .entry-node {
+        width: 88%;
+        top: 0;
+    }
+
+    .left-node,
+    .right-node,
+    .bottom-node {
+        width: 78%;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .left-node {
+        top: 150px;
+    }
+
+    .right-node {
+        top: 278px;
+    }
+
+    .bottom-node {
+        top: 406px;
+        bottom: auto;
+    }
+
+    .hero-copy {
+        width: calc(100% - 32px);
+        padding: 20px;
+    }
+
+    .hero-copy h1 {
+        font-size: clamp(36px, 10vw, 56px);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .section {
+        padding: 56px 18px;
+    }
+
+    .section-head {
+        grid-template-columns: 1fr;
+    }
+
+    .analysis-table a {
+        grid-template-columns: 82px 38px 1fr 20px;
+    }
+
+    .analysis-table small,
+    .reference-table small {
+        display: none;
+    }
+
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reference-table a {
+        grid-template-columns: 90px 1fr 20px;
+    }
+
+    .status-bar {
+        grid-template-columns: 1fr auto;
+    }
+
+    .status-bar > div:nth-child(2) {
+        display: none;
+    }
+}
+
+
+
+/* Readability pass */
+.brand strong {
+    font-size: 14px;
+}
+
+.brand span {
+    font-size: 10px;
+}
+
+.site-nav a,
+.repo-button {
+    font-size: 11px;
+}
+
+.node-title span,
+.node-title strong,
+.addr,
+.node-body code {
+    font-size: 10px;
+}
+
+.eyebrow,
+.section-head span {
+    font-size: 11px;
+}
+
+.hero-copy > p,
+.section-head > p {
+    font-size: 14px;
+}
+
+.analysis-table strong,
+.reference-table strong {
+    font-size: 13px;
+}
+
+.analysis-table small,
+.reference-table small {
+    font-size: 11px;
+}
+
+.console pre {
+    font-size: 12px;
+}
+
+.notes-grid article > span {
+    font-size: 10px;
+}
+
+.notes-grid p {
+    font-size: 12px;
+}
+
+.status-bar {
+    font-size: 10px;
+}
+
+
+/* HACKED display accents — intentionally limited to high-emphasis labels. */
+.site-navbar .brand strong,
+.hero-copy h1 span,
+.mutation-step > strong,
+.feedback-target strong {
+    font-family: "HACKED", var(--mono);
+    font-weight: 400;
+    letter-spacing: 0.035em;
+}
+
+.site-navbar .brand strong {
+    font-size: 17px;
+    color: var(--cyan-blue);
+}
+
+.hero-copy h1 span {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 1.04em;
+    letter-spacing: 0.025em;
+}
+
+.mutation-step > strong {
+    font-size: 18px;
+    letter-spacing: 0.06em;
+}
+
+.feedback-target strong {
+    font-size: 17px;
+    letter-spacing: 0.07em;
+}
+
+
+/* Larger typography pass */
+body {
+    font-size: 16px;
+}
+
+.site-navbar {
+    min-height: 78px;
+}
+
+.site-navbar .brand strong {
+    font-size: 20px;
+}
+
+.site-navbar .brand span {
+    font-size: 12px;
+}
+
+.site-nav a,
+.repo-button {
+    font-size: 13px;
+}
+
+.repo-button {
+    min-height: 40px;
+    padding: 0 16px;
+}
+
+.node-title {
+    min-height: 36px;
+}
+
+.node-title span,
+.node-title strong {
+    font-size: 12px;
+}
+
+.addr,
+.node-body code {
+    font-size: 12px;
+}
+
+.node-body {
+    row-gap: 7px;
+}
+
+.eyebrow {
+    font-size: 13px;
+}
+
+.hero-copy h1 {
+    font-size: clamp(46px, 5.8vw, 78px);
+}
+
+.hero-copy > p {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.button {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 12px;
+}
+
+.section-head span {
+    font-size: 13px;
+}
+
+.section-head h2 {
+    font-size: clamp(32px, 3.6vw, 50px);
+}
+
+.section-head > p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.analysis-table a {
+    min-height: 70px;
+}
+
+.address,
+.type {
+    font-size: 12px;
+}
+
+.analysis-table strong,
+.reference-table strong {
+    font-size: 15px;
+}
+
+.analysis-table small,
+.reference-table small {
+    font-size: 13px;
+}
+
+.flow-step-head span {
+    font-size: 13px;
+}
+
+.flow-step-head small {
+    font-size: 12px;
+}
+
+.flow-step > strong {
+    font-size: 17px;
+}
+
+.flow-step > p {
+    font-size: 13px;
+}
+
+.mutation-step > strong {
+    font-size: 21px;
+}
+
+.mutation-tags span {
+    font-size: 12px;
+}
+
+.feedback-copy span {
+    font-size: 12px;
+}
+
+.feedback-copy strong {
+    font-size: 16px;
+}
+
+.feedback-signals span {
+    font-size: 12px;
+}
+
+.feedback-target small {
+    font-size: 12px;
+}
+
+.feedback-target strong {
+    font-size: 20px;
+}
+
+.console-head span {
+    font-size: 12px;
+}
+
+.console-head small {
+    font-size: 11px;
+}
+
+.console-head button {
+    font-size: 12px;
+}
+
+.console pre {
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.notes-grid article > span {
+    font-size: 12px;
+}
+
+.notes-grid strong {
+    font-size: 17px;
+}
+
+.notes-grid p {
+    font-size: 14px;
+}
+
+.reference-table a {
+    min-height: 66px;
+}
+
+.status-bar {
+    min-height: 34px;
+    font-size: 12px;
+}
+
+@media (max-width: 720px) {
+    .site-navbar {
+        min-height: 68px;
+    }
+
+    .site-navbar .brand span {
+        display: none;
+    }
+
+    .hero-copy h1 {
+        font-size: clamp(40px, 11vw, 60px);
+    }
+
+    .hero-copy > p {
+        font-size: 15px;
+    }
+
+    .section-head h2 {
+        font-size: clamp(30px, 9vw, 44px);
+    }
+
+    .analysis-table a {
+        grid-template-columns: 92px 44px 1fr 20px;
+    }
+
+    .address,
+    .type,
+    .analysis-table strong,
+    .reference-table strong {
+        font-size: 12px;
+    }
+
+    .flow-step-head span {
+        font-size: 12px;
+    }
+
+    .flow-step > strong {
+        font-size: 16px;
+    }
+
+    .flow-step > p {
+        font-size: 13px;
+    }
+
+    .console pre {
+        font-size: 13px;
+    }
+}
+
+
+/* Angular fuzzing-oriented typography */
+body {
+    font-family: var(--sans);
+    font-weight: 400;
+    letter-spacing: 0.008em;
+}
+
+.site-nav a,
+.repo-button,
+.eyebrow,
+.section-head span,
+.type,
+.flow-step-head span,
+.feedback-copy span,
+.mutation-tags span {
+    font-family: var(--sans);
+    font-weight: 600;
+    letter-spacing: 0.055em;
+}
+
+.hero-copy h1,
+.section-head h2,
+.analysis-table strong,
+.reference-table strong,
+.notes-grid strong,
+.feedback-copy strong {
+    font-family: var(--sans);
+}
+
+.hero-copy h1,
+.section-head h2 {
+    font-weight: 600;
+}
+
+.analysis-table strong,
+.reference-table strong,
+.notes-grid strong,
+.feedback-copy strong {
+    font-weight: 600;
+}
+
+.node-title span,
+.node-title strong,
+.addr,
+.node-body code,
+.address,
+.flow-step-head small,
+.flow-step > strong,
+.flow-step > p,
+.feedback-target small,
+.console-head,
+.console pre,
+.status-bar {
+    font-family: var(--mono);
+}
+
+.site-navbar .brand strong,
+.hero-copy h1 span,
+.mutation-step > strong,
+.feedback-target strong {
+    font-family: "HACKED", var(--sans);
+}
+
+/* Keep HACKED accents intentionally restrained. */
+.site-navbar .brand strong {
+    letter-spacing: 0.045em;
+}
+
+.hero-copy h1 span {
+    letter-spacing: 0.03em;
+}
+
+.mutation-step > strong,
+.feedback-target strong {
+    letter-spacing: 0.065em;
+}
+
+/* Unified accent palette */
+.site-navbar .brand strong,
+.hero-copy h1 span,
+.mutation-step > strong,
+.feedback-target strong,
+.eyebrow,
+.section-head span,
+.address,
+.type,
+.node-title span,
+.node-title strong,
+.node-body code b,
+.site-nav a:hover,
+.repo-button,
+.button.primary,
+.analysis-table b,
+.reference-table b,
+.flow-step-head span,
+.flow-step-head small,
+.feedback-copy span,
+.feedback-icon,
+.console .prompt {
+    color: var(--cyan-blue);
+}
+
+.repo-button:hover,
+.button:hover,
+.button.primary,
+.mutation-step,
+.feedback-band,
+.feedback-target {
+    border-color: var(--cyan-blue);
+}
+
+.button.primary {
+    background: rgba(77, 231, 255, 0.14);
+}
+
+.mutation-step {
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.08), transparent 52%),
+        rgba(16, 27, 34, 0.98);
+}
+
+.feedback-band {
+    background:
+        linear-gradient(90deg, rgba(77, 231, 255, 0.08), transparent 55%),
+        #0d171c;
+}
+
+
+/* Interactive hover / unhover motion */
+.repo-button,
+.button,
+.analysis-table a,
+.reference-table a,
+.site-nav a {
+    transition:
+        color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repo-button,
+.button {
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 0 rgba(77, 231, 255, 0);
+}
+
+.repo-button::before,
+.button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            110deg,
+            transparent 0%,
+            rgba(77, 231, 255, 0.06) 38%,
+            rgba(77, 231, 255, 0.22) 50%,
+            rgba(77, 231, 255, 0.06) 62%,
+            transparent 100%
+        );
+    transform: translateX(-130%);
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repo-button:hover,
+.button:hover {
+    color: #eaffff;
+    border-color: var(--cyan-blue);
+    background: rgba(77, 231, 255, 0.12);
+    transform: translateY(-2px) scale(1.015);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.28),
+        0 0 18px rgba(77, 231, 255, 0.16),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.08);
+}
+
+.repo-button:hover::before,
+.button:hover::before {
+    transform: translateX(130%);
+}
+
+.repo-button:active,
+.button:active {
+    transform: translateY(0) scale(0.985);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(77, 231, 255, 0.10);
+}
+
+.button.primary {
+    background: rgba(77, 231, 255, 0.12);
+    border-color: rgba(77, 231, 255, 0.55);
+}
+
+.button.primary:hover {
+    background: rgba(77, 231, 255, 0.20);
+    border-color: var(--cyan-blue);
+}
+
+/* Row-style actions use a quieter version of the same interaction language. */
+.analysis-table a,
+.reference-table a {
+    position: relative;
+    transform: translateX(0);
+}
+
+.analysis-table a:hover,
+.reference-table a:hover {
+    color: #eaffff;
+    background: rgba(77, 231, 255, 0.065);
+    transform: translateX(5px);
+    box-shadow:
+        inset 3px 0 0 var(--cyan-blue),
+        inset 0 0 30px rgba(77, 231, 255, 0.025);
+}
+
+/* Navbar links animate both into and out of the highlighted state. */
+.site-nav a {
+    opacity: 0.76;
+    transform: translateY(0);
+}
+
+.site-nav a:hover {
+    opacity: 1;
+    color: var(--cyan-blue);
+    transform: translateY(-1px);
+}
+
+.site-nav a::after {
+    transition:
+        right 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.55;
+}
+
+.site-nav a:hover::after {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .repo-button,
+    .button,
+    .analysis-table a,
+    .reference-table a,
+    .site-nav a,
+    .repo-button::before,
+    .button::before,
+    .site-nav a::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .repo-button:hover,
+    .button:hover,
+    .analysis-table a:hover,
+    .reference-table a:hover,
+    .site-nav a:hover {
+        transform: none;
+    }
+}
+
+
+/* Scripted fuzzing flow simulator */
+.scripted-flow {
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(rgba(77, 231, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 231, 255, 0.025) 1px, transparent 1px),
+        #0a1117;
+    background-size: 22px 22px;
+    overflow: hidden;
+}
+
+.scripted-flow .flow-track {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1fr) 52px
+        minmax(220px, 1fr) 52px
+        minmax(250px, 1.2fr) 52px
+        minmax(220px, 1fr) 52px
+        minmax(220px, 1fr) 52px
+        minmax(220px, 1fr);
+    align-items: stretch;
+    padding: 26px;
+}
+
+.scripted-flow .flow-step {
+    min-height: 264px;
+    padding: 18px;
+    border: 1px solid #294651;
+    background: rgba(16, 27, 34, 0.94);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition:
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scripted-flow .flow-step::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(77, 231, 255, 0.035) 42%,
+            rgba(77, 231, 255, 0.14) 50%,
+            rgba(77, 231, 255, 0.035) 58%,
+            transparent 100%
+        );
+    opacity: 0;
+    transform: translateX(-115%);
+    transition:
+        opacity 220ms ease,
+        transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scripted-flow .flow-step-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+}
+
+.scripted-flow .flow-step-head span {
+    color: var(--cyan-blue);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+}
+
+.scripted-flow .flow-step-head small {
+    color: var(--cyan-blue);
+    font-size: 12px;
+}
+
+.scripted-flow .flow-step > strong {
+    margin-top: auto;
+    color: #d6f7ff;
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.scripted-flow .flow-step > p {
+    margin: 10px 0 0;
+    color: #87a1ab;
+    line-height: 1.6;
+    font-family: var(--mono);
+    font-size: 13px;
+}
+
+.scripted-flow .step-state {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: #8ea8b1;
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.scripted-flow .state-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #31505b;
+    box-shadow: 0 0 0 0 rgba(77, 231, 255, 0);
+    transition:
+        background-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+}
+
+.scripted-flow .flow-step.is-dimmed {
+    opacity: 0.72;
+}
+
+.scripted-flow .flow-step.is-active {
+    border-color: var(--cyan-blue);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.09), transparent 58%),
+        rgba(16, 27, 34, 0.98);
+    transform: translateY(-4px);
+    box-shadow:
+        0 18px 30px rgba(0, 0, 0, 0.28),
+        0 0 20px rgba(77, 231, 255, 0.14),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.10);
+}
+
+.scripted-flow .flow-step.is-active::after {
+    opacity: 1;
+    transform: translateX(115%);
+}
+
+.scripted-flow .flow-step.is-active .state-dot {
+    background: var(--cyan-blue);
+    box-shadow: 0 0 0 8px rgba(77, 231, 255, 0.10);
+    transform: scale(1.1);
+}
+
+.scripted-flow .flow-step.is-complete {
+    border-color: rgba(77, 231, 255, 0.55);
+    background: rgba(16, 27, 34, 0.96);
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.24),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.06);
+}
+
+.scripted-flow .flow-step.is-complete .state-dot {
+    background: var(--cyan-blue);
+}
+
+.scripted-flow .mutation-step {
+    border-color: rgba(77, 231, 255, 0.55);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.06), transparent 52%),
+        rgba(16, 27, 34, 0.98);
+}
+
+.scripted-flow .mutation-step > strong {
+    color: var(--cyan-blue);
+}
+
+.scripted-flow .mutation-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+}
+
+.scripted-flow .mutation-tags span {
+    padding: 5px 7px;
+    border: 1px solid #294651;
+    background: #0b171d;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+.scripted-flow .flow-connector {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.scripted-flow .connector-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(77, 231, 255, 0.16),
+        rgba(77, 231, 255, 0.36),
+        rgba(77, 231, 255, 0.16)
+    );
+    opacity: 0.35;
+    transition:
+        opacity 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+}
+
+.scripted-flow .connector-pulse {
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--cyan-blue);
+    box-shadow: 0 0 16px rgba(77, 231, 255, 0.20);
+    opacity: 0;
+    transform: translateX(0) scale(0.85);
+    transition:
+        opacity 160ms ease,
+        transform 160ms ease;
+}
+
+.scripted-flow .flow-connector.is-active .connector-line,
+.scripted-flow .flow-connector.is-complete .connector-line {
+    opacity: 0.95;
+    box-shadow: 0 0 14px rgba(77, 231, 255, 0.12);
+}
+
+.scripted-flow .flow-connector.is-active .connector-pulse {
+    opacity: 1;
+    animation: flowPulse 1s linear infinite;
+}
+
+.scripted-flow .flow-connector.is-complete .connector-pulse {
+    opacity: 0;
+}
+
+.scripted-flow .feedback-lane {
+    padding: 0 26px 24px;
+}
+
+.scripted-flow .lane-title {
+    margin-bottom: 10px;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.82;
+}
+
+.scripted-flow .lane-body {
+    display: grid;
+    grid-template-columns: 180px minmax(120px, 1fr) minmax(340px, 1.2fr) 180px;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid #294651;
+    background:
+        linear-gradient(90deg, rgba(77, 231, 255, 0.05), transparent 68%),
+        rgba(8, 16, 22, 0.88);
+    transition:
+        border-color 240ms ease,
+        box-shadow 240ms ease,
+        background-color 240ms ease;
+}
+
+.scripted-flow .feedback-lane.is-active .lane-body {
+    border-color: var(--cyan-blue);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.08);
+    background:
+        linear-gradient(90deg, rgba(77, 231, 255, 0.08), transparent 72%),
+        rgba(8, 16, 22, 0.94);
+}
+
+.scripted-flow .lane-anchor {
+    min-height: 72px;
+    padding: 10px 12px;
+    border: 1px solid #294651;
+    background: rgba(11, 23, 29, 0.92);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scripted-flow .lane-anchor small,
+.scripted-flow .lane-anchor strong {
+    font-family: var(--mono);
+}
+
+.scripted-flow .lane-anchor small {
+    color: #8ea8b1;
+    font-size: 11px;
+}
+
+.scripted-flow .lane-anchor strong {
+    margin-top: 5px;
+    color: #d4f4fc;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.scripted-flow .lane-body.is-targeting .mutation-destination {
+    border-color: var(--cyan-blue);
+    box-shadow: 0 0 18px rgba(77, 231, 255, 0.12);
+}
+
+.scripted-flow .lane-body.is-targeting .mutation-destination strong {
+    color: var(--cyan-blue);
+}
+
+.scripted-flow .lane-trace {
+    position: relative;
+    height: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.scripted-flow .lane-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(77, 231, 255, 0.08),
+        rgba(77, 231, 255, 0.55),
+        rgba(77, 231, 255, 0.08)
+    );
+}
+
+.scripted-flow .lane-pulse {
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--cyan-blue);
+    box-shadow: 0 0 16px rgba(77, 231, 255, 0.20);
+    opacity: 0;
+}
+
+.scripted-flow .feedback-lane.is-active .lane-pulse {
+    opacity: 1;
+    animation: returnPulse 1.25s linear infinite;
+}
+
+.scripted-flow .lane-signals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.scripted-flow .lane-signals span,
+.monitor-signals span {
+    padding: 6px 8px;
+    border: 1px solid #294651;
+    background: #091218;
+    color: #8da7b0;
+    font-family: var(--mono);
+    font-size: 12px;
+    transition:
+        color 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        background-color 220ms ease,
+        transform 220ms ease;
+}
+
+.scripted-flow .lane-signals span.is-lit,
+.monitor-signals span.is-lit {
+    color: var(--cyan-blue);
+    border-color: var(--cyan-blue);
+    background: rgba(77, 231, 255, 0.08);
+    box-shadow: 0 0 16px rgba(77, 231, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.scripted-flow .flow-monitor {
+    display: grid;
+    grid-template-columns: 120px 220px minmax(260px, 1fr) minmax(220px, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    background: rgba(8, 16, 22, 0.92);
+}
+
+.scripted-flow .monitor-card {
+    min-height: 94px;
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.scripted-flow .monitor-card:last-child {
+    border-right: 0;
+}
+
+.scripted-flow .monitor-card span {
+    color: #8ea8b1;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+}
+
+.scripted-flow .monitor-card strong {
+    margin-top: 7px;
+    color: #d6f7ff;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.scripted-flow .monitor-card[data-state="feedback"] strong,
+.scripted-flow .monitor-card[data-state="return"] strong {
+    color: var(--cyan-blue);
+}
+
+.scripted-flow .monitor-signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+}
+
+@keyframes flowPulse {
+    0% {
+        transform: translateX(-8px) scale(0.88);
+    }
+
+    100% {
+        transform: translateX(calc(100% + 8px)) scale(1);
+    }
+}
+
+@keyframes returnPulse {
+    0% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(calc(100% + 10px));
+    }
+}
+
+@media (max-width: 1320px) {
+    .scripted-flow .flow-track {
+        overflow-x: auto;
+    }
+
+    .scripted-flow .flow-track {
+        grid-template-columns:
+            240px 46px
+            240px 46px
+            270px 46px
+            240px 46px
+            240px 46px
+            240px;
+    }
+
+    .scripted-flow .lane-body {
+        grid-template-columns: 160px minmax(90px, 1fr) minmax(260px, 1fr) 160px;
+    }
+}
+
+@media (max-width: 920px) {
+    .scripted-flow .lane-body {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .scripted-flow .lane-signals {
+        justify-content: flex-start;
+    }
+
+    .scripted-flow .flow-monitor {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-track {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        overflow: visible;
+        padding: 16px;
+    }
+
+    .scripted-flow .flow-step {
+        min-height: 200px;
+    }
+
+    .scripted-flow .flow-connector {
+        min-height: 24px;
+    }
+
+    .scripted-flow .connector-line {
+        width: 2px;
+        height: 100%;
+    }
+
+    .scripted-flow .connector-pulse {
+        left: 50%;
+        top: 0;
+        width: 10px;
+        height: 18px;
+        transform: translateX(-50%);
+    }
+
+    .scripted-flow .flow-connector.is-active .connector-pulse {
+        animation: flowPulseVertical 1s linear infinite;
+    }
+
+    .scripted-flow .feedback-lane {
+        padding: 0 16px 16px;
+    }
+
+    .scripted-flow .flow-monitor {
+        grid-template-columns: 1fr;
+    }
+
+    .scripted-flow .monitor-card {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .scripted-flow .monitor-card:last-child {
+        border-bottom: 0;
+    }
+}
+
+@keyframes flowPulseVertical {
+    0% {
+        transform: translate(-50%, -8px) scale(0.88);
+    }
+
+    100% {
+        transform: translate(-50%, calc(100% + 8px)) scale(1);
+    }
+}
+
+
+/* Flow animation v2 — smoother phase transitions */
+.scripted-flow .flow-step,
+.scripted-flow .flow-connector,
+.scripted-flow .feedback-lane,
+.scripted-flow .lane-body,
+.scripted-flow .lane-anchor,
+.scripted-flow .lane-signals span,
+.monitor-signals span {
+    transition:
+        color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scripted-flow .flow-step.is-active {
+    transform: translateY(-3px);
+}
+
+.scripted-flow .flow-step.is-feedback-target {
+    border-color: var(--cyan-blue);
+    transform: translateY(-3px) scale(1.015);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.12), transparent 62%),
+        rgba(16, 27, 34, 0.99);
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.30),
+        0 0 26px rgba(77, 231, 255, 0.18),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.12);
+}
+
+.scripted-flow .flow-step.is-feedback-target .state-dot {
+    background: var(--cyan-blue);
+    box-shadow:
+        0 0 0 8px rgba(77, 231, 255, 0.10),
+        0 0 20px rgba(77, 231, 255, 0.18);
+}
+
+.scripted-flow .connector-pulse {
+    left: 0;
+    transform: none;
+}
+
+.scripted-flow .flow-connector.is-active .connector-pulse {
+    animation: connectorTravel 700ms cubic-bezier(0.35, 0, 0.2, 1) forwards;
+}
+
+.scripted-flow .feedback-lane.is-returning .lane-pulse {
+    animation: feedbackTravel 1500ms cubic-bezier(0.35, 0, 0.2, 1) forwards;
+}
+
+@keyframes connectorTravel {
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: scale(0.82);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    88% {
+        opacity: 1;
+    }
+
+    100% {
+        left: calc(100% - 18px);
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes feedbackTravel {
+    0% {
+        left: 0;
+        opacity: 0;
+        transform: scaleX(0.8);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        left: calc(100% - 22px);
+        opacity: 0;
+        transform: scaleX(1);
+    }
+}
+
+/* Expanded HACKED usage — display/UI emphasis only */
+.site-navbar .brand strong,
+.site-nav a,
+.hero-copy h1,
+.hero-copy h1 span,
+.section-head h2,
+.flow-step-head span,
+.scripted-flow .flow-step > strong,
+.feedback-copy span,
+.feedback-copy strong,
+.feedback-target strong,
+.lane-anchor strong,
+.lane-title,
+.monitor-card > span,
+.monitor-card > strong,
+.notes-grid strong {
+    font-family: "HACKED", var(--sans);
+    font-weight: 400;
+}
+
+.site-nav a,
+.repo-button,
+.button {
+    letter-spacing: 0.055em;
+}
+
+.hero-copy h1,
+.section-head h2 {
+    letter-spacing: 0.025em;
+}
+
+.flow-step-head span,
+.scripted-flow .flow-step > strong,
+.feedback-copy span,
+.feedback-copy strong,
+.lane-anchor strong,
+.lane-title,
+.monitor-card > span,
+.monitor-card > strong {
+    letter-spacing: 0.045em;
+}
+
+/* Keep code/data readable in monospace */
+.node-title span,
+.node-title strong,
+.addr,
+.node-body code,
+.address,
+.type,
+.flow-step-head small,
+.scripted-flow .flow-step > p,
+.step-state,
+.mutation-tags span,
+.lane-signals span,
+.monitor-signals span,
+.console-head,
+.console pre,
+.status-bar {
+    font-family: var(--mono);
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-connector.is-active .connector-pulse {
+        animation: connectorTravelVertical 700ms cubic-bezier(0.35, 0, 0.2, 1) forwards;
+    }
+}
+
+@keyframes connectorTravelVertical {
+    0% {
+        top: 0;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.82);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    88% {
+        opacity: 1;
+    }
+
+    100% {
+        top: calc(100% - 18px);
+        opacity: 0;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Button typography + interaction revision
+   --------------------------------------------------------- */
+
+/* Buttons intentionally use Chakra Petch, not HACKED. */
+.repo-button,
+.button,
+.console-head button {
+    font-family: var(--sans) !important;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+}
+
+/* Disable the previous sheen pseudo-element animation. */
+.repo-button::before,
+.button::before {
+    content: none !important;
+}
+
+/*
+ * New interaction:
+ * - no lift / scale motion
+ * - cyan fill sweeps from left to right on hover
+ * - the exact same transition reverses on unhover
+ */
+.repo-button,
+.button {
+    transform: none !important;
+    background-color: #101d25;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(77, 231, 255, 0.16) 0%,
+            rgba(77, 231, 255, 0.16) 50%,
+            transparent 50%,
+            transparent 100%
+        );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border-color: #294651;
+    box-shadow:
+        inset 0 0 0 0 rgba(77, 231, 255, 0),
+        0 0 0 rgba(77, 231, 255, 0);
+    transition:
+        background-position 340ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 340ms cubic-bezier(0.22, 1, 0.36, 1),
+        color 340ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repo-button:hover,
+.button:hover {
+    transform: none !important;
+    background-position: 0 0;
+    border-color: var(--cyan-blue);
+    color: #ecfcff;
+    box-shadow:
+        inset 0 0 0 1px rgba(77, 231, 255, 0.10),
+        0 0 20px rgba(77, 231, 255, 0.12);
+}
+
+.repo-button:active,
+.button:active {
+    transform: none !important;
+    background-position: 0 0;
+    box-shadow:
+        inset 0 0 0 1px rgba(77, 231, 255, 0.22),
+        inset 0 0 18px rgba(77, 231, 255, 0.08);
+}
+
+.button.primary {
+    background-color: rgba(77, 231, 255, 0.08);
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(77, 231, 255, 0.26) 0%,
+            rgba(77, 231, 255, 0.26) 50%,
+            transparent 50%,
+            transparent 100%
+        );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border-color: rgba(77, 231, 255, 0.60);
+    color: var(--cyan-blue);
+}
+
+.button.primary:hover {
+    background-position: 0 0;
+    border-color: var(--cyan-blue);
+    color: #ffffff;
+}
+
+/* Keep the copy button understated but consistent. */
+.console-head button {
+    transition:
+        color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+        text-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.console-head button:hover {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(77, 231, 255, 0.48);
+}
+
+/* ---------------------------------------------------------
+   Hero underline repair
+   --------------------------------------------------------- */
+
+/*
+ * Prevent the browser from cutting the underline around glyph descenders.
+ * This is the source of the "broken" underline appearance in the hero copy.
+ */
+.hero-copy u {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: var(--cyan-blue);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-skip: none;
+}
+
+/* Slightly increase spacing so a multi-line underline never touches text. */
+.hero-copy > p {
+    line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .repo-button,
+    .button,
+    .console-head button {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Feedback return — visual effect on existing flow
+   --------------------------------------------------------- */
+
+/* Dedicated return lane removed: feedback now travels backward through the graph. */
+.feedback-lane {
+    display: none !important;
+}
+
+.scripted-flow .flow-step.is-return-source {
+    border-color: var(--cyan-blue);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.08), transparent 60%),
+        rgba(16, 27, 34, 0.98);
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.26),
+        0 0 18px rgba(77, 231, 255, 0.12);
+}
+
+.scripted-flow .flow-step.is-return-source::after {
+    opacity: 1;
+    transform: translateX(-115%);
+}
+
+.scripted-flow .flow-step.is-feedback-target {
+    border-color: var(--cyan-blue);
+    transform: translateY(-3px) scale(1.012);
+    background:
+        linear-gradient(180deg, rgba(77, 231, 255, 0.13), transparent 62%),
+        rgba(16, 27, 34, 0.99);
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.30),
+        0 0 28px rgba(77, 231, 255, 0.18),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.14);
+}
+
+.scripted-flow .flow-connector.is-return-active .connector-line {
+    opacity: 1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(77, 231, 255, 0.14),
+            rgba(77, 231, 255, 0.82),
+            rgba(77, 231, 255, 0.14)
+        );
+    box-shadow: 0 0 16px rgba(77, 231, 255, 0.16);
+}
+
+.scripted-flow .flow-connector.is-return-active .connector-pulse {
+    opacity: 1;
+    left: auto;
+    right: 0;
+    animation: feedbackReturnTravel 620ms cubic-bezier(0.35, 0, 0.2, 1) forwards;
+}
+
+@keyframes feedbackReturnTravel {
+    0% {
+        right: 0;
+        opacity: 0;
+        transform: scale(0.78);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    82% {
+        opacity: 1;
+        box-shadow:
+            0 0 16px rgba(77, 231, 255, 0.22),
+            0 0 30px rgba(77, 231, 255, 0.10);
+    }
+
+    100% {
+        right: calc(100% - 18px);
+        opacity: 0;
+        transform: scale(1.05);
+    }
+}
+
+/* A brief inward glow makes the destination feel like it received feedback. */
+.scripted-flow .flow-step.is-feedback-target .state-dot {
+    background: var(--cyan-blue);
+    animation: feedbackTargetPulse 620ms ease-out both;
+}
+
+@keyframes feedbackTargetPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(77, 231, 255, 0);
+    }
+
+    45% {
+        box-shadow:
+            0 0 0 10px rgba(77, 231, 255, 0.10),
+            0 0 24px rgba(77, 231, 255, 0.20);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 6px rgba(77, 231, 255, 0.06),
+            0 0 14px rgba(77, 231, 255, 0.12);
+    }
+}
+
+/* ---------------------------------------------------------
+   Monitor font correction
+   --------------------------------------------------------- */
+
+/* HACKED remains for the active stage only. */
+.monitor-card > span,
+.monitor-card > strong {
+    font-family: var(--mono) !important;
+    letter-spacing: 0.04em;
+}
+
+/* Card 2 = ACTIVE STAGE: keep the display treatment. */
+.flow-monitor .monitor-card:nth-child(2) > span,
+.flow-monitor .monitor-card:nth-child(2) > strong {
+    font-family: "HACKED", var(--sans) !important;
+    font-weight: 400;
+    letter-spacing: 0.045em;
+}
+
+/* CYCLE and STATUS specifically stay monospace. */
+.flow-monitor .monitor-card:nth-child(1) > span,
+.flow-monitor .monitor-card:nth-child(1) > strong,
+.flow-monitor .monitor-card:nth-child(3) > span,
+.flow-monitor .monitor-card:nth-child(3) > strong {
+    font-family: var(--mono) !important;
+    font-weight: 500;
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-connector.is-return-active .connector-pulse {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        animation: feedbackReturnTravelVertical 620ms cubic-bezier(0.35, 0, 0.2, 1) forwards;
+    }
+}
+
+@keyframes feedbackReturnTravelVertical {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.78);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    82% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: calc(100% - 18px);
+        opacity: 0;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   MUTATION-only glitch / jitter effect
+   --------------------------------------------------------- */
+
+/*
+ * Only the active MUTATION stage gets the glitch treatment.
+ * Other stages, including feedback-target highlighting, remain stable.
+ */
+.scripted-flow [data-step="mutation"].is-active {
+    animation: mutationCardJitter 700ms steps(2, end) infinite;
+    transform-origin: center center;
+}
+
+.scripted-flow [data-step="mutation"].is-active > strong {
+    position: relative;
+    display: inline-block;
+    animation: mutationTextGlitch 520ms steps(2, end) infinite;
+    text-shadow:
+        1px 0 0 rgba(77, 231, 255, 0.28),
+        -1px 0 0 rgba(77, 231, 255, 0.18);
+}
+
+.scripted-flow [data-step="mutation"].is-active > strong::before,
+.scripted-flow [data-step="mutation"].is-active > strong::after {
+    content: attr(data-glitch);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.75;
+    mix-blend-mode: screen;
+}
+
+.scripted-flow [data-step="mutation"].is-active > strong::before {
+    color: rgba(77, 231, 255, 0.75);
+    transform: translate(1px, 0);
+    clip-path: inset(0 0 58% 0);
+    animation: mutationSliceA 560ms steps(2, end) infinite;
+}
+
+.scripted-flow [data-step="mutation"].is-active > strong::after {
+    color: rgba(77, 231, 255, 0.42);
+    transform: translate(-1px, 0);
+    clip-path: inset(52% 0 0 0);
+    animation: mutationSliceB 640ms steps(2, end) infinite;
+}
+
+/* a tiny line noise on the card edge to sell the effect */
+.scripted-flow [data-step="mutation"].is-active::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: 10px;
+    height: 2px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(77, 231, 255, 0.0) 10%,
+            rgba(77, 231, 255, 0.6) 34%,
+            rgba(77, 231, 255, 0.18) 49%,
+            rgba(77, 231, 255, 0.55) 68%,
+            transparent 100%
+        );
+    opacity: 0.55;
+    animation: mutationScanNoise 680ms linear infinite;
+    pointer-events: none;
+}
+
+@keyframes mutationCardJitter {
+    0% {
+        transform: translateY(-3px) translateX(0);
+    }
+
+    18% {
+        transform: translateY(-3px) translateX(1px);
+    }
+
+    20% {
+        transform: translateY(-3px) translateX(-1px);
+    }
+
+    38% {
+        transform: translateY(-3px) translateX(0);
+    }
+
+    56% {
+        transform: translateY(-3px) translateX(1px);
+    }
+
+    58% {
+        transform: translateY(-3px) translateX(0);
+    }
+
+    76% {
+        transform: translateY(-3px) translateX(-1px);
+    }
+
+    100% {
+        transform: translateY(-3px) translateX(0);
+    }
+}
+
+@keyframes mutationTextGlitch {
+    0% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+
+    16% {
+        transform: translate(1px, 0);
+    }
+
+    18% {
+        transform: translate(-1px, 0);
+    }
+
+    34% {
+        transform: translate(0, 0);
+    }
+
+    52% {
+        transform: translate(1px, 0);
+    }
+
+    54% {
+        transform: translate(0, 0);
+    }
+
+    70% {
+        transform: translate(-1px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+}
+
+@keyframes mutationSliceA {
+    0%,
+    100% {
+        transform: translate(1px, 0);
+        opacity: 0.55;
+    }
+
+    22% {
+        transform: translate(-1px, -1px);
+        opacity: 0.9;
+    }
+
+    24% {
+        transform: translate(2px, 1px);
+        opacity: 0.75;
+    }
+
+    60% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+
+    62% {
+        transform: translate(1px, -1px);
+        opacity: 0.85;
+    }
+}
+
+@keyframes mutationSliceB {
+    0%,
+    100% {
+        transform: translate(-1px, 0);
+        opacity: 0.32;
+    }
+
+    12% {
+        transform: translate(1px, 1px);
+        opacity: 0.72;
+    }
+
+    14% {
+        transform: translate(-2px, 0);
+        opacity: 0.45;
+    }
+
+    48% {
+        transform: translate(0, 0);
+        opacity: 0.28;
+    }
+
+    78% {
+        transform: translate(-1px, 1px);
+        opacity: 0.62;
+    }
+}
+
+@keyframes mutationScanNoise {
+    0% {
+        transform: translateX(-8%);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.65;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+    88% {
+        opacity: 0.58;
+    }
+
+    100% {
+        transform: translateX(8%);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scripted-flow [data-step="mutation"].is-active,
+    .scripted-flow [data-step="mutation"].is-active > strong,
+    .scripted-flow [data-step="mutation"].is-active > strong::before,
+    .scripted-flow [data-step="mutation"].is-active > strong::after,
+    .scripted-flow [data-step="mutation"].is-active::before {
+        animation: none !important;
+    }
+}
+
+
+
+/* ---------------------------------------------------------
+   Font Awesome icon system
+   --------------------------------------------------------- */
+
+.site-nav a,
+.repo-button,
+.button,
+.console-head button,
+.notes-grid strong,
+.status-bar > div,
+.status-bar > a {
+    gap: 8px;
+}
+
+.site-nav a,
+.repo-button,
+.button,
+.console-head button {
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-nav a > i,
+.repo-button > i,
+.button > i,
+.console-head button > i,
+.notes-grid strong > i,
+.status-bar i {
+    color: var(--cyan-blue);
+    font-size: 0.9em;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.site-nav a > i {
+    opacity: 0.72;
+    transition:
+        opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav a:hover > i {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.repo-button > i,
+.button > i {
+    transition:
+        transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+        text-shadow 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.repo-button:hover > i,
+.button:hover > i {
+    transform: translateX(2px);
+    text-shadow: 0 0 12px rgba(77, 231, 255, 0.42);
+}
+
+/* Row icons occupy their own compact grid column. */
+.analysis-table a {
+    grid-template-columns: 92px 46px 28px 1fr 1.3fr;
+}
+
+.reference-table a {
+    grid-template-columns: 100px 28px 1fr 1.2fr;
+}
+
+.row-icon {
+    width: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--cyan-blue);
+    font-size: 13px;
+    opacity: 0.78;
+    transition:
+        opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        text-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.analysis-table a:hover .row-icon,
+.reference-table a:hover .row-icon {
+    opacity: 1;
+    transform: scale(1.08);
+    text-shadow: 0 0 12px rgba(77, 231, 255, 0.36);
+}
+
+/* Flow-stage icons are intentionally subtle so the animation remains primary. */
+.scripted-flow .flow-step-head span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scripted-flow .flow-step-head span > i {
+    width: 16px;
+    color: var(--cyan-blue);
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.66;
+    transition:
+        opacity 300ms ease,
+        transform 300ms ease,
+        text-shadow 300ms ease;
+}
+
+.scripted-flow .flow-step.is-active .flow-step-head span > i,
+.scripted-flow .flow-step.is-feedback-target .flow-step-head span > i {
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 0 12px rgba(77, 231, 255, 0.36);
+}
+
+.scripted-flow [data-step="mutation"].is-active .flow-step-head span > i {
+    animation: mutationIconGlitch 520ms steps(2, end) infinite;
+}
+
+@keyframes mutationIconGlitch {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1.1);
+    }
+
+    24% {
+        transform: translate(1px, -1px) scale(1.12);
+    }
+
+    26% {
+        transform: translate(-1px, 0) scale(1.08);
+    }
+
+    62% {
+        transform: translate(1px, 0) scale(1.1);
+    }
+
+    64% {
+        transform: translate(0, 1px) scale(1.12);
+    }
+}
+
+.console-head span > i {
+    margin-right: 7px;
+    color: var(--cyan-blue);
+}
+
+.console-head button {
+    min-width: 74px;
+    justify-content: center;
+}
+
+.notes-grid strong {
+    display: flex;
+    align-items: center;
+}
+
+.notes-grid strong > i {
+    width: 20px;
+}
+
+.status-bar i {
+    opacity: 0.78;
+}
+
+#copyright {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 720px) {
+    .analysis-table a {
+        grid-template-columns: 78px 34px 26px 1fr;
+    }
+
+    .reference-table a {
+        grid-template-columns: 84px 26px 1fr;
+    }
+
+    .site-nav a > i {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scripted-flow [data-step="mutation"].is-active .flow-step-head span > i {
+        animation: none !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Ambient disassembly scatter
+   --------------------------------------------------------- */
+
+.hero-disassembly {
+    overflow: visible;
+}
+
+.ambient-node {
+    width: 248px;
+    opacity: 0.48;
+    filter: saturate(0.86);
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.ambient-node .node-title {
+    min-height: 30px;
+}
+
+.ambient-node .node-title span,
+.ambient-node .node-title strong,
+.ambient-node .addr,
+.ambient-node .node-body code {
+    font-size: 10px;
+}
+
+.ambient-node .node-body {
+    padding: 8px 10px;
+    grid-template-columns: 38px 1fr;
+    row-gap: 4px;
+}
+
+/* deliberately irregular placement around the middle of the hero canvas */
+.ambient-a {
+    left: -3%;
+    top: 180px;
+    transform: rotate(-1.4deg);
+}
+
+.ambient-b {
+    right: -2%;
+    top: 130px;
+    transform: rotate(1.1deg);
+}
+
+.ambient-c {
+    left: 19%;
+    top: 395px;
+    transform: rotate(0.8deg);
+}
+
+.ambient-d {
+    right: 18%;
+    top: 420px;
+    transform: rotate(-0.9deg);
+}
+
+.ambient-e {
+    left: 2%;
+    top: 500px;
+    transform: rotate(1.5deg);
+}
+
+.ambient-f {
+    right: 1%;
+    top: 535px;
+    transform: rotate(-1.3deg);
+}
+
+/* keep the central explanation frame visually dominant */
+.hero-copy {
+    box-shadow:
+        0 30px 76px rgba(0, 0, 0, 0.56),
+        0 0 0 1px rgba(77, 231, 255, 0.035) inset;
+}
+
+.hero-copy::after {
+    content: "";
+    position: absolute;
+    inset: -38px;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.50) 0%,
+            rgba(11, 17, 23, 0.26) 46%,
+            transparent 76%
+        );
+}
+
+@media (max-width: 1050px) {
+    .ambient-a,
+    .ambient-e {
+        left: -8%;
+    }
+
+    .ambient-b,
+    .ambient-f {
+        right: -8%;
+    }
+
+    .ambient-c {
+        left: 12%;
+    }
+
+    .ambient-d {
+        right: 12%;
+    }
+
+    .ambient-node {
+        opacity: 0.38;
+    }
+}
+
+@media (max-width: 720px) {
+    .ambient-node {
+        width: 72%;
+        opacity: 0.20;
+        transform: none;
+    }
+
+    .ambient-a {
+        left: -18%;
+        top: 90px;
+    }
+
+    .ambient-b {
+        right: -16%;
+        top: 195px;
+    }
+
+    .ambient-c {
+        left: -12%;
+        top: 305px;
+    }
+
+    .ambient-d {
+        right: -12%;
+        top: 415px;
+    }
+
+    .ambient-e,
+    .ambient-f {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Dense ambient disassembly field
+   --------------------------------------------------------- */
+
+.ambient-g {
+    width: 220px;
+    left: 7%;
+    top: 95px;
+    opacity: 0.34;
+    transform: rotate(0.7deg);
+}
+
+.ambient-h {
+    width: 236px;
+    right: 8%;
+    top: 82px;
+    opacity: 0.31;
+    transform: rotate(-0.6deg);
+}
+
+.ambient-i {
+    width: 210px;
+    left: 29%;
+    top: 155px;
+    opacity: 0.26;
+    transform: rotate(1.2deg);
+}
+
+.ambient-j {
+    width: 226px;
+    right: 31%;
+    top: 175px;
+    opacity: 0.28;
+    transform: rotate(-1deg);
+}
+
+.ambient-k {
+    width: 214px;
+    left: 1%;
+    top: 330px;
+    opacity: 0.33;
+    transform: rotate(-1.1deg);
+}
+
+.ambient-l {
+    width: 230px;
+    right: 2%;
+    top: 340px;
+    opacity: 0.34;
+    transform: rotate(1.3deg);
+}
+
+.ambient-m {
+    width: 218px;
+    left: 25%;
+    top: 505px;
+    opacity: 0.25;
+    transform: rotate(-0.8deg);
+}
+
+.ambient-n {
+    width: 222px;
+    right: 27%;
+    top: 515px;
+    opacity: 0.27;
+    transform: rotate(0.9deg);
+}
+
+.ambient-o {
+    width: 212px;
+    left: 11%;
+    top: 610px;
+    opacity: 0.29;
+    transform: rotate(1.4deg);
+}
+
+.ambient-p {
+    width: 228px;
+    right: 10%;
+    top: 602px;
+    opacity: 0.30;
+    transform: rotate(-1.2deg);
+}
+
+/* Give the full background field a little more depth variation. */
+.ambient-a,
+.ambient-d,
+.ambient-g,
+.ambient-j,
+.ambient-m,
+.ambient-p {
+    filter: saturate(0.82) brightness(0.92);
+}
+
+.ambient-b,
+.ambient-e,
+.ambient-h,
+.ambient-k,
+.ambient-n {
+    filter: saturate(0.88) brightness(0.86);
+}
+
+.ambient-c,
+.ambient-f,
+.ambient-i,
+.ambient-l,
+.ambient-o {
+    filter: saturate(0.76) brightness(0.80);
+}
+
+/* Slight blur on the farthest-looking fragments. */
+.ambient-i,
+.ambient-j,
+.ambient-m,
+.ambient-n {
+    filter: blur(0.25px) saturate(0.78) brightness(0.82);
+}
+
+/* Keep the center readable even with a much denser field. */
+.hero-copy::after {
+    inset: -56px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.66) 0%,
+            rgba(11, 17, 23, 0.48) 38%,
+            rgba(11, 17, 23, 0.18) 66%,
+            transparent 82%
+        );
+}
+
+@media (max-width: 1050px) {
+    .ambient-g {
+        left: 2%;
+    }
+
+    .ambient-h {
+        right: 2%;
+    }
+
+    .ambient-i,
+    .ambient-m {
+        left: 21%;
+    }
+
+    .ambient-j,
+    .ambient-n {
+        right: 21%;
+    }
+
+    .ambient-k,
+    .ambient-o {
+        left: -4%;
+    }
+
+    .ambient-l,
+    .ambient-p {
+        right: -4%;
+    }
+
+    .ambient-g,
+    .ambient-h,
+    .ambient-i,
+    .ambient-j,
+    .ambient-k,
+    .ambient-l,
+    .ambient-m,
+    .ambient-n,
+    .ambient-o,
+    .ambient-p {
+        opacity: 0.22;
+    }
+}
+
+@media (max-width: 720px) {
+    .ambient-g,
+    .ambient-h,
+    .ambient-i,
+    .ambient-j,
+    .ambient-k,
+    .ambient-l,
+    .ambient-m,
+    .ambient-n,
+    .ambient-o,
+    .ambient-p {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Side-balanced ambient disassembly layout
+   --------------------------------------------------------- */
+
+/*
+ * Widen the ambient canvas slightly so side fragments can breathe without
+ * crowding the center explanation panel.
+ */
+.hero-disassembly {
+    width: min(1280px, calc(100% - 24px));
+}
+
+/*
+ * Re-balance the fragment field:
+ * - stronger presence on the left and right sides
+ * - softer inner-side placement
+ * - center remains intentionally clearer
+ */
+.ambient-node {
+    opacity: 0.30;
+}
+
+.ambient-a {
+    width: 228px;
+    left: -7%;
+    top: 96px;
+    opacity: 0.34;
+    transform: rotate(-1.2deg);
+}
+
+.ambient-b {
+    width: 232px;
+    right: -7%;
+    top: 102px;
+    opacity: 0.34;
+    transform: rotate(1.1deg);
+}
+
+.ambient-c {
+    width: 222px;
+    left: 4%;
+    top: 210px;
+    opacity: 0.31;
+    transform: rotate(0.7deg);
+}
+
+.ambient-d {
+    width: 224px;
+    right: 4%;
+    top: 222px;
+    opacity: 0.31;
+    transform: rotate(-0.8deg);
+}
+
+.ambient-e {
+    width: 218px;
+    left: -5%;
+    top: 340px;
+    opacity: 0.29;
+    transform: rotate(1.2deg);
+}
+
+.ambient-f {
+    width: 224px;
+    right: -4%;
+    top: 362px;
+    opacity: 0.29;
+    transform: rotate(-1deg);
+}
+
+.ambient-g {
+    width: 214px;
+    left: 15%;
+    top: 64px;
+    opacity: 0.24;
+    transform: rotate(0.5deg);
+}
+
+.ambient-h {
+    width: 216px;
+    right: 15%;
+    top: 72px;
+    opacity: 0.24;
+    transform: rotate(-0.5deg);
+}
+
+.ambient-i {
+    width: 210px;
+    left: 23%;
+    top: 168px;
+    opacity: 0.20;
+    transform: rotate(1deg);
+}
+
+.ambient-j {
+    width: 214px;
+    right: 23%;
+    top: 176px;
+    opacity: 0.20;
+    transform: rotate(-0.9deg);
+}
+
+.ambient-k {
+    width: 212px;
+    left: 12%;
+    top: 304px;
+    opacity: 0.22;
+    transform: rotate(-1deg);
+}
+
+.ambient-l {
+    width: 216px;
+    right: 12%;
+    top: 314px;
+    opacity: 0.22;
+    transform: rotate(1deg);
+}
+
+.ambient-m {
+    width: 208px;
+    left: 18%;
+    top: 468px;
+    opacity: 0.18;
+    transform: rotate(-0.8deg);
+}
+
+.ambient-n {
+    width: 210px;
+    right: 18%;
+    top: 476px;
+    opacity: 0.18;
+    transform: rotate(0.8deg);
+}
+
+.ambient-o {
+    width: 220px;
+    left: 2%;
+    top: 532px;
+    opacity: 0.26;
+    transform: rotate(1.3deg);
+}
+
+.ambient-p {
+    width: 220px;
+    right: 2%;
+    top: 546px;
+    opacity: 0.26;
+    transform: rotate(-1.3deg);
+}
+
+/* Original larger background nodes also shift slightly outward. */
+.left-node {
+    left: 7%;
+    top: 248px;
+    opacity: 0.52;
+}
+
+.right-node {
+    right: 7%;
+    top: 248px;
+    opacity: 0.52;
+}
+
+.entry-node {
+    top: 10px;
+    opacity: 0.56;
+}
+
+.bottom-node {
+    bottom: 4px;
+    opacity: 0.50;
+}
+
+/* Depth grouping for a more believable layered workspace feel. */
+.ambient-a,
+.ambient-b,
+.ambient-c,
+.ambient-d,
+.ambient-e,
+.ambient-f,
+.ambient-o,
+.ambient-p {
+    filter: saturate(0.88) brightness(0.90);
+}
+
+.ambient-g,
+.ambient-h,
+.ambient-k,
+.ambient-l {
+    filter: saturate(0.80) brightness(0.84);
+}
+
+.ambient-i,
+.ambient-j,
+.ambient-m,
+.ambient-n {
+    filter: blur(0.35px) saturate(0.74) brightness(0.78);
+}
+
+/* Keep the center comfortably readable. */
+.hero-copy::after {
+    inset: -66px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.72) 0%,
+            rgba(11, 17, 23, 0.58) 34%,
+            rgba(11, 17, 23, 0.24) 62%,
+            transparent 82%
+        );
+}
+
+@media (max-width: 1200px) {
+    .hero-disassembly {
+        width: min(1180px, calc(100% - 18px));
+    }
+
+    .ambient-a,
+    .ambient-e {
+        left: -10%;
+    }
+
+    .ambient-b,
+    .ambient-f {
+        right: -10%;
+    }
+
+    .ambient-c,
+    .ambient-o {
+        left: -2%;
+    }
+
+    .ambient-d,
+    .ambient-p {
+        right: -2%;
+    }
+
+    .ambient-g,
+    .ambient-k {
+        left: 10%;
+    }
+
+    .ambient-h,
+    .ambient-l {
+        right: 10%;
+    }
+
+    .ambient-i,
+    .ambient-m {
+        left: 19%;
+    }
+
+    .ambient-j,
+    .ambient-n {
+        right: 19%;
+    }
+}
+
+@media (max-width: 900px) {
+    .ambient-node {
+        opacity: 0.18;
+    }
+
+    .left-node {
+        left: 3%;
+    }
+
+    .right-node {
+        right: 3%;
+    }
+
+    .ambient-a,
+    .ambient-b,
+    .ambient-e,
+    .ambient-f {
+        opacity: 0.22;
+    }
+
+    .ambient-g,
+    .ambient-h,
+    .ambient-i,
+    .ambient-j,
+    .ambient-k,
+    .ambient-l,
+    .ambient-m,
+    .ambient-n {
+        opacity: 0.14;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-disassembly {
+        width: calc(100% - 20px);
+    }
+
+    .ambient-a,
+    .ambient-c,
+    .ambient-e,
+    .ambient-o {
+        left: -22%;
+    }
+
+    .ambient-b,
+    .ambient-d,
+    .ambient-f,
+    .ambient-p {
+        right: -20%;
+    }
+
+    .ambient-g,
+    .ambient-h,
+    .ambient-i,
+    .ambient-j,
+    .ambient-k,
+    .ambient-l,
+    .ambient-m,
+    .ambient-n {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Wide scatter redistribution
+   --------------------------------------------------------- */
+
+/*
+ * Use the available horizontal space much more aggressively.
+ * Center remains a protected reading zone.
+ */
+.hero-disassembly {
+    width: min(1560px, calc(100% - 8px));
+    height: 720px;
+}
+
+/* Lower the overall density in the center and keep nodes clearly separated. */
+.ambient-node,
+.entry-node,
+.left-node,
+.right-node,
+.bottom-node {
+    pointer-events: none;
+}
+
+/* Major background nodes */
+.entry-node {
+    width: 338px;
+    left: 50%;
+    top: 6px;
+    transform: translateX(-50%);
+    opacity: 0.42;
+}
+
+.left-node {
+    width: 282px;
+    left: 2%;
+    top: 246px;
+    opacity: 0.40;
+}
+
+.right-node {
+    width: 282px;
+    right: 2%;
+    top: 248px;
+    opacity: 0.40;
+}
+
+.bottom-node {
+    width: 324px;
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+    opacity: 0.36;
+}
+
+/* Far-left / left-inner / far-right / right-inner lanes */
+.ambient-a {
+    width: 212px;
+    left: -10%;
+    top: 72px;
+    opacity: 0.30;
+    transform: rotate(-1.2deg);
+}
+
+.ambient-b {
+    width: 214px;
+    right: -10%;
+    top: 82px;
+    opacity: 0.30;
+    transform: rotate(1.1deg);
+}
+
+.ambient-c {
+    width: 204px;
+    left: 1%;
+    top: 138px;
+    opacity: 0.24;
+    transform: rotate(0.7deg);
+}
+
+.ambient-d {
+    width: 206px;
+    right: 1%;
+    top: 144px;
+    opacity: 0.24;
+    transform: rotate(-0.8deg);
+}
+
+.ambient-e {
+    width: 210px;
+    left: -8%;
+    top: 316px;
+    opacity: 0.26;
+    transform: rotate(1.0deg);
+}
+
+.ambient-f {
+    width: 212px;
+    right: -8%;
+    top: 326px;
+    opacity: 0.26;
+    transform: rotate(-1.0deg);
+}
+
+.ambient-g {
+    width: 196px;
+    left: 12%;
+    top: 58px;
+    opacity: 0.18;
+    transform: rotate(0.4deg);
+}
+
+.ambient-h {
+    width: 198px;
+    right: 12%;
+    top: 64px;
+    opacity: 0.18;
+    transform: rotate(-0.4deg);
+}
+
+.ambient-i {
+    width: 188px;
+    left: 18%;
+    top: 148px;
+    opacity: 0.15;
+    transform: rotate(0.9deg);
+}
+
+.ambient-j {
+    width: 188px;
+    right: 18%;
+    top: 154px;
+    opacity: 0.15;
+    transform: rotate(-0.9deg);
+}
+
+.ambient-k {
+    width: 194px;
+    left: 8%;
+    top: 406px;
+    opacity: 0.19;
+    transform: rotate(-0.8deg);
+}
+
+.ambient-l {
+    width: 196px;
+    right: 8%;
+    top: 414px;
+    opacity: 0.19;
+    transform: rotate(0.8deg);
+}
+
+.ambient-m {
+    width: 186px;
+    left: 16%;
+    top: 520px;
+    opacity: 0.14;
+    transform: rotate(-0.7deg);
+}
+
+.ambient-n {
+    width: 186px;
+    right: 16%;
+    top: 528px;
+    opacity: 0.14;
+    transform: rotate(0.7deg);
+}
+
+.ambient-o {
+    width: 202px;
+    left: -4%;
+    top: 566px;
+    opacity: 0.22;
+    transform: rotate(1.2deg);
+}
+
+.ambient-p {
+    width: 202px;
+    right: -4%;
+    top: 574px;
+    opacity: 0.22;
+    transform: rotate(-1.2deg);
+}
+
+/* Depth / distance grouping */
+.ambient-a,
+.ambient-b,
+.ambient-e,
+.ambient-f,
+.ambient-o,
+.ambient-p {
+    filter: saturate(0.90) brightness(0.90);
+}
+
+.ambient-c,
+.ambient-d,
+.ambient-g,
+.ambient-h,
+.ambient-k,
+.ambient-l {
+    filter: saturate(0.82) brightness(0.84);
+}
+
+.ambient-i,
+.ambient-j,
+.ambient-m,
+.ambient-n {
+    filter: blur(0.4px) saturate(0.74) brightness(0.78);
+}
+
+/* Stronger central protection so the wide scatter does not fight the copy. */
+.hero-copy::after {
+    inset: -82px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.80) 0%,
+            rgba(11, 17, 23, 0.64) 34%,
+            rgba(11, 17, 23, 0.28) 61%,
+            transparent 82%
+        );
+}
+
+/* Responsive scaling while still preferring side distribution */
+@media (max-width: 1360px) {
+    .hero-disassembly {
+        width: min(1360px, calc(100% - 14px));
+    }
+
+    .ambient-a {
+        left: -12%;
+    }
+
+    .ambient-b {
+        right: -12%;
+    }
+
+    .ambient-e {
+        left: -10%;
+    }
+
+    .ambient-f {
+        right: -10%;
+    }
+
+    .ambient-g {
+        left: 9%;
+    }
+
+    .ambient-h {
+        right: 9%;
+    }
+
+    .ambient-i {
+        left: 15%;
+    }
+
+    .ambient-j {
+        right: 15%;
+    }
+
+    .ambient-k {
+        left: 6%;
+    }
+
+    .ambient-l {
+        right: 6%;
+    }
+
+    .ambient-m {
+        left: 13%;
+    }
+
+    .ambient-n {
+        right: 13%;
+    }
+}
+
+@media (max-width: 1080px) {
+    .hero-disassembly {
+        width: min(1180px, calc(100% - 18px));
+        height: 660px;
+    }
+
+    .ambient-node {
+        opacity: 0.15;
+    }
+
+    .left-node {
+        left: -1%;
+    }
+
+    .right-node {
+        right: -1%;
+    }
+
+    .ambient-a,
+    .ambient-b,
+    .ambient-e,
+    .ambient-f,
+    .ambient-o,
+    .ambient-p {
+        opacity: 0.18;
+    }
+
+    .ambient-g,
+    .ambient-h,
+    .ambient-k,
+    .ambient-l {
+        opacity: 0.12;
+    }
+
+    .ambient-i,
+    .ambient-j,
+    .ambient-m,
+    .ambient-n {
+        opacity: 0.10;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-disassembly {
+        width: calc(100% - 20px);
+        height: 540px;
+    }
+
+    .ambient-a,
+    .ambient-c,
+    .ambient-e,
+    .ambient-o {
+        left: -24%;
+    }
+
+    .ambient-b,
+    .ambient-d,
+    .ambient-f,
+    .ambient-p {
+        right: -24%;
+    }
+
+    .ambient-g,
+    .ambient-h,
+    .ambient-i,
+    .ambient-j,
+    .ambient-k,
+    .ambient-l,
+    .ambient-m,
+    .ambient-n {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Random full-canvas disassembly field
+   --------------------------------------------------------- */
+
+/* Remove any old connector lines entirely. */
+.hero-wires {
+    display: none !important;
+}
+
+.hero-stage {
+    overflow: hidden;
+}
+
+.hero-disassembly {
+    width: min(1620px, calc(100% - 8px));
+    height: 760px;
+    position: absolute;
+    inset: 0;
+    margin: 0 auto;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.field-node {
+    position: absolute;
+    width: 208px;
+    opacity: 0.28;
+    filter: saturate(0.86) brightness(0.88);
+    transform-origin: center;
+}
+
+.field-node .node-title {
+    min-height: 28px;
+}
+
+.field-node .node-title span,
+.field-node .node-title strong,
+.field-node .addr,
+.field-node .node-body code {
+    font-size: 10px;
+}
+
+.field-node .node-body {
+    padding: 8px 10px;
+    grid-template-columns: 38px 1fr;
+    row-gap: 4px;
+}
+
+.field-node:nth-child(3n) {
+    filter: saturate(0.90) brightness(0.92);
+}
+
+.field-node:nth-child(4n) {
+    filter: saturate(0.76) brightness(0.82);
+}
+
+.field-node:nth-child(5n) {
+    filter: blur(0.25px) saturate(0.74) brightness(0.78);
+}
+
+/* Irregular non-symmetric placement across the whole wide canvas. */
+.n01 { width: 264px; left: 3%;  top: 18px;  opacity: 0.34; transform: rotate(-1.1deg); }
+.n02 { width: 228px; left: 14%; top: 152px; opacity: 0.24; transform: rotate(0.8deg); }
+.n03 { width: 236px; left: 72%; top: 96px;  opacity: 0.30; transform: rotate(-0.7deg); }
+.n04 { width: 232px; left: 61%; top: 522px; opacity: 0.26; transform: rotate(1.0deg); }
+
+.n05 { width: 214px; left: -2%; top: 126px; opacity: 0.29; transform: rotate(1.4deg); }
+.n06 { width: 220px; left: 82%; top: 34px;  opacity: 0.30; transform: rotate(-1.2deg); }
+.n07 { width: 208px; left: 7%;  top: 424px; opacity: 0.23; transform: rotate(-0.6deg); }
+.n08 { width: 214px; left: 76%; top: 274px; opacity: 0.24; transform: rotate(1.2deg); }
+
+.n09 { width: 216px; left: 22%; top: 46px;  opacity: 0.18; transform: rotate(0.5deg); }
+.n10 { width: 216px; left: 68%; top: 654px; opacity: 0.22; transform: rotate(-1.4deg); }
+.n11 { width: 208px; left: 0%;  top: 584px; opacity: 0.27; transform: rotate(1.0deg); }
+.n12 { width: 212px; left: 86%; top: 182px; opacity: 0.28; transform: rotate(-0.5deg); }
+
+.n13 { width: 196px; left: 28%; top: 646px; opacity: 0.16; transform: rotate(0.9deg); }
+.n14 { width: 198px; left: 54%; top: 164px; opacity: 0.17; transform: rotate(-0.9deg); }
+.n15 { width: 206px; left: 10%; top: 278px; opacity: 0.20; transform: rotate(1.1deg); }
+.n16 { width: 202px; left: 79%; top: 442px; opacity: 0.21; transform: rotate(-0.8deg); }
+
+.n17 { width: 198px; left: 34%; top: 96px;  opacity: 0.14; transform: rotate(-0.4deg); }
+.n18 { width: 202px; left: 47%; top: 614px; opacity: 0.17; transform: rotate(0.7deg); }
+.n19 { width: 212px; left: 18%; top: 540px; opacity: 0.20; transform: rotate(-1.0deg); }
+.n20 { width: 210px; left: 90%; top: 544px; opacity: 0.28; transform: rotate(1.4deg); }
+
+/* A softer halo so more of the field is visible while the copy stays readable. */
+.hero-copy {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-copy::after {
+    content: "";
+    position: absolute;
+    inset: -74px;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(11, 17, 23, 0.64) 0%,
+            rgba(11, 17, 23, 0.46) 35%,
+            rgba(11, 17, 23, 0.18) 63%,
+            transparent 84%
+        );
+}
+
+/* Keep them visible on narrower windows while still scattered. */
+@media (max-width: 1440px) {
+    .hero-disassembly {
+        width: min(1420px, calc(100% - 10px));
+        height: 740px;
+    }
+
+    .n05 { left: -4%; }
+    .n06 { left: 80%; }
+    .n12 { left: 84%; }
+    .n20 { left: 86%; }
+}
+
+@media (max-width: 1120px) {
+    .hero-disassembly {
+        width: min(1180px, calc(100% - 16px));
+        height: 680px;
+    }
+
+    .field-node {
+        opacity: 0.18;
+    }
+
+    .n01, .n03, .n05, .n06, .n11, .n12, .n20 {
+        opacity: 0.22;
+    }
+
+    .n10, .n13, .n18 {
+        opacity: 0.15;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-disassembly {
+        width: calc(100% - 18px);
+        height: 560px;
+    }
+
+    .field-node {
+        width: 176px !important;
+        opacity: 0.16 !important;
+        filter: saturate(0.72) brightness(0.78);
+    }
+
+    .n01 { left: -4%; top: 18px; }
+    .n03 { left: 52%; top: 60px; }
+    .n05 { left: -10%; top: 160px; }
+    .n06 { left: 54%; top: 178px; }
+    .n07 { left: 4%; top: 296px; }
+    .n08 { left: 58%; top: 310px; }
+    .n11 { left: -8%; top: 430px; }
+    .n12 { left: 58%; top: 448px; }
+
+    .n02, .n04, .n09, .n10, .n13, .n14, .n15, .n16, .n17, .n18, .n19, .n20 {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Fast feedback -> mutation hot loop
+   --------------------------------------------------------- */
+
+.scripted-flow .flow-step.is-hot-loop {
+    border-color: rgba(77, 231, 255, 0.58);
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.24),
+        0 0 14px rgba(77, 231, 255, 0.08),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.05);
+}
+
+.scripted-flow .flow-connector.is-rapid-return .connector-line {
+    opacity: 1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(77, 231, 255, 0.12),
+            rgba(77, 231, 255, 0.88),
+            rgba(77, 231, 255, 0.12)
+        );
+    box-shadow:
+        0 0 14px rgba(77, 231, 255, 0.16),
+        0 0 24px rgba(77, 231, 255, 0.08);
+}
+
+.scripted-flow .flow-connector.is-rapid-return .connector-pulse {
+    opacity: 1;
+    left: auto;
+    right: 0;
+    animation: rapidReturnTravel 430ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.scripted-flow .flow-connector.is-rapid-return:nth-of-type(4n + 2) .connector-pulse {
+    animation-delay: 0ms;
+}
+
+.scripted-flow .flow-connector.is-rapid-return:nth-of-type(4n + 4) .connector-pulse {
+    animation-delay: 35ms;
+}
+
+.scripted-flow .flow-connector.is-rapid-return:nth-of-type(4n + 6) .connector-pulse {
+    animation-delay: 70ms;
+}
+
+@keyframes rapidReturnTravel {
+    0% {
+        right: 0;
+        opacity: 0;
+        transform: scale(0.84);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    72% {
+        opacity: 1;
+        box-shadow:
+            0 0 16px rgba(77, 231, 255, 0.24),
+            0 0 30px rgba(77, 231, 255, 0.12);
+    }
+
+    100% {
+        right: calc(100% - 18px);
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}
+
+.scripted-flow .flow-step.is-feedback-target.is-hot-loop {
+    animation: mutationReceiveBurst 430ms ease-out both;
+}
+
+@keyframes mutationReceiveBurst {
+    0% {
+        transform: translateY(-3px) scale(1);
+        box-shadow:
+            0 18px 34px rgba(0, 0, 0, 0.30),
+            0 0 28px rgba(77, 231, 255, 0.18),
+            inset 0 0 0 1px rgba(77, 231, 255, 0.14);
+    }
+
+    35% {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow:
+            0 18px 34px rgba(0, 0, 0, 0.30),
+            0 0 34px rgba(77, 231, 255, 0.26),
+            inset 0 0 0 1px rgba(77, 231, 255, 0.18);
+    }
+
+    100% {
+        transform: translateY(-3px) scale(1.012);
+        box-shadow:
+            0 18px 34px rgba(0, 0, 0, 0.30),
+            0 0 28px rgba(77, 231, 255, 0.18),
+            inset 0 0 0 1px rgba(77, 231, 255, 0.14);
+    }
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-connector.is-rapid-return .connector-pulse {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        animation: rapidReturnTravelVertical 430ms cubic-bezier(0.2, 0, 0, 1) forwards;
+    }
+}
+
+@keyframes rapidReturnTravelVertical {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.84);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    72% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: calc(100% - 18px);
+        opacity: 0;
+        transform: translateX(-50%) scale(1.08);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   IDA screenshot hero background example
+   --------------------------------------------------------- */
+
+/* Old synthetic disassembly view is no longer used in the hero. */
+.hero-disassembly,
+.hero-wires {
+    display: none !important;
+}
+
+.hero-stage {
+    isolation: isolate;
+    background:
+        linear-gradient(rgba(77, 231, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 231, 255, 0.028) 1px, transparent 1px),
+        #0b1117;
+    background-size: 22px 22px;
+}
+
+.hero-ida-background {
+    position: absolute;
+    inset: 34px 3.5%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border: 1px solid rgba(77, 231, 255, 0.08);
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(11, 17, 23, 0.20),
+            rgba(11, 17, 23, 0.02) 28%,
+            rgba(11, 17, 23, 0.05) 72%,
+            rgba(11, 17, 23, 0.24)
+        ),
+        var(--ida-background-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.20;
+    filter:
+        grayscale(1)
+        contrast(1.28)
+        brightness(0.72)
+        saturate(0.35);
+    transform: scale(1.015);
+}
+
+/* subtle cyan tint, but keep the screenshot recognizably tool-like */
+.hero-ida-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(77, 231, 255, 0.045),
+            transparent 22%,
+            transparent 76%,
+            rgba(77, 231, 255, 0.035)
+        );
+    mix-blend-mode: screen;
+}
+
+/* dark center mask so the hero copy wins visually */
+.hero-ida-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(11, 17, 23, 0.92) 0%,
+            rgba(11, 17, 23, 0.72) 25%,
+            rgba(11, 17, 23, 0.28) 52%,
+            rgba(11, 17, 23, 0.04) 78%
+        );
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 3;
+}
+
+/* remove the older broad halo because the image layer now masks its own center */
+.hero-copy::after {
+    display: none !important;
+}
+
+@media (min-width: 1500px) {
+    .hero-ida-background {
+        left: 2%;
+        right: 2%;
+        background-size: 112% auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero-ida-background {
+        inset: 24px 2%;
+        opacity: 0.15;
+        background-size: auto 100%;
+        background-position: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-ida-background {
+        inset: 16px 0;
+        opacity: 0.11;
+        background-size: auto 92%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   CFG screenshot hero background example (16:9)
+   --------------------------------------------------------- */
+
+.hero-cfg-background {
+    position: absolute;
+    left: 50%;
+    top: 28px;
+    width: min(1920px, calc(100% - 28px));
+    aspect-ratio: 16 / 9;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border: 1px solid rgba(77, 231, 255, 0.07);
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(11, 17, 23, 0.10),
+            rgba(11, 17, 23, 0.01) 28%,
+            rgba(11, 17, 23, 0.02) 72%,
+            rgba(11, 17, 23, 0.12)
+        ),
+        var(--cfg-background-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.24;
+    filter:
+        grayscale(0.86)
+        contrast(1.08)
+        brightness(0.76)
+        saturate(0.55);
+}
+
+.hero-cfg-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(77, 231, 255, 0.04),
+            transparent 20%,
+            transparent 78%,
+            rgba(77, 231, 255, 0.03)
+        );
+    mix-blend-mode: screen;
+}
+
+.hero-cfg-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(11, 17, 23, 0.88) 0%,
+            rgba(11, 17, 23, 0.70) 24%,
+            rgba(11, 17, 23, 0.26) 54%,
+            rgba(11, 17, 23, 0.04) 80%
+        );
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 1280px) {
+    .hero-cfg-background {
+        width: calc(100% - 18px);
+        top: 24px;
+        opacity: 0.21;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-cfg-background {
+        width: calc(100% - 10px);
+        top: 14px;
+        opacity: 0.14;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Full-bleed CFG background
+   --------------------------------------------------------- */
+
+/*
+ * The previous version treated the CFG image like a centered framed element.
+ * This override makes it behave like a true background layer:
+ * no margin, no inner padding, no fixed 16:9 box.
+ */
+.hero-stage {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-cfg-background {
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto !important;
+    transform: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(11, 17, 23, 0.10),
+            rgba(11, 17, 23, 0.02) 24%,
+            rgba(11, 17, 23, 0.02) 76%,
+            rgba(11, 17, 23, 0.12)
+        ),
+        var(--cfg-background-image) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    opacity: 0.24 !important;
+    filter:
+        grayscale(0.86)
+        contrast(1.08)
+        brightness(0.74)
+        saturate(0.55) !important;
+}
+
+/* Slightly broader vignette so the image still reads as background. */
+.hero-cfg-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(11, 17, 23, 0.86) 0%,
+            rgba(11, 17, 23, 0.68) 26%,
+            rgba(11, 17, 23, 0.28) 56%,
+            rgba(11, 17, 23, 0.08) 82%
+        );
+}
+
+/* Make sure the copy remains above the full-bleed background. */
+.hero-copy {
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 1280px) {
+    .hero-cfg-background {
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0.20 !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-cfg-background {
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0.14 !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Full-window CFG screenshot background
+   --------------------------------------------------------- */
+
+.hero-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.hero-cfg-background {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    opacity: 0.23 !important;
+    filter:
+        grayscale(0.72)
+        contrast(1.10)
+        brightness(0.68)
+        saturate(0.62) !important;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* dark tint and center-readability mask sit over the actual screenshot */
+.hero-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(11, 17, 23, 0.10),
+            rgba(11, 17, 23, 0.02) 22%,
+            rgba(11, 17, 23, 0.03) 78%,
+            rgba(11, 17, 23, 0.14)
+        ),
+        radial-gradient(
+            ellipse at center,
+            rgba(11, 17, 23, 0.80) 0%,
+            rgba(11, 17, 23, 0.60) 28%,
+            rgba(11, 17, 23, 0.22) 58%,
+            rgba(11, 17, 23, 0.04) 82%
+        );
+}
+
+/* neutralize older background-layer pseudo effects */
+.hero-cfg-background::before,
+.hero-cfg-background::after {
+    content: none !important;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 3;
+}
+
+@media (max-width: 900px) {
+    .hero-cfg-background {
+        opacity: 0.18 !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-cfg-background {
+        opacity: 0.13 !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Sequential fast feedback return
+   --------------------------------------------------------- */
+
+/*
+ * FEEDBACK returns one connector at a time:
+ * FEEDBACK -> TRIAGE -> EXECUTE -> MUTATION.
+ * Each hop is short, but intentionally sequential rather than simultaneous.
+ */
+.scripted-flow .flow-connector.is-return-active .connector-pulse {
+    animation: sequentialFeedbackReturn 260ms cubic-bezier(0.18, 0.7, 0.2, 1) forwards !important;
+}
+
+@keyframes sequentialFeedbackReturn {
+    0% {
+        right: 0;
+        opacity: 0;
+        transform: scale(0.78);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    78% {
+        opacity: 1;
+        box-shadow:
+            0 0 18px rgba(77, 231, 255, 0.26),
+            0 0 32px rgba(77, 231, 255, 0.12);
+    }
+
+    100% {
+        right: calc(100% - 18px);
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}
+
+/* Destination flashes briefly on each individual reverse hop. */
+.scripted-flow .flow-step.is-return-pass {
+    transition-duration: 180ms !important;
+}
+
+.scripted-flow .flow-step.is-return-pass .state-dot {
+    animation: sequentialReturnTarget 260ms ease-out both;
+}
+
+@keyframes sequentialReturnTarget {
+    0% {
+        box-shadow: 0 0 0 0 rgba(77, 231, 255, 0);
+    }
+
+    42% {
+        box-shadow:
+            0 0 0 9px rgba(77, 231, 255, 0.12),
+            0 0 24px rgba(77, 231, 255, 0.22);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 5px rgba(77, 231, 255, 0.06),
+            0 0 13px rgba(77, 231, 255, 0.12);
+    }
+}
+
+/*
+ * Once feedback reaches MUTATION, keep it visibly active for the longer
+ * post-feedback hold handled by script.js.
+ */
+.scripted-flow [data-step="mutation"].is-active.is-feedback-target {
+    border-color: var(--cyan-blue);
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.30),
+        0 0 34px rgba(77, 231, 255, 0.22),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.16);
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-connector.is-return-active .connector-pulse {
+        animation: sequentialFeedbackReturnVertical 260ms cubic-bezier(0.18, 0.7, 0.2, 1) forwards !important;
+    }
+}
+
+@keyframes sequentialFeedbackReturnVertical {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.78);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    78% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: calc(100% - 18px);
+        opacity: 0;
+        transform: translateX(-50%) scale(1.08);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Rotating project showcase
+   --------------------------------------------------------- */
+
+.showcase-section {
+    padding: 84px 36px;
+    border-bottom: 1px solid var(--line);
+    background:
+        radial-gradient(
+            circle at 72% 44%,
+            rgba(77, 231, 255, 0.055),
+            transparent 32%
+        ),
+        #0b1117;
+}
+
+.showcase-shell {
+    width: min(1480px, 100%);
+    min-height: 620px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(360px, 0.78fr) minmax(620px, 1.42fr);
+    gap: clamp(48px, 6vw, 110px);
+    align-items: center;
+}
+
+.showcase-copy {
+    min-width: 0;
+}
+
+.showcase-index {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin-bottom: 32px;
+    color: #5f7a85;
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+.showcase-index span:first-child {
+    color: var(--cyan-blue);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.showcase-kicker {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 9px;
+    border-left: 2px solid var(--cyan-blue);
+    background: rgba(77, 231, 255, 0.055);
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.showcase-copy h2 {
+    margin: 18px 0 18px;
+    color: #e5fbff;
+    font-family: "HACKED", var(--sans);
+    font-size: clamp(38px, 4.2vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.025em;
+}
+
+.showcase-copy > p {
+    max-width: 560px;
+    margin: 0;
+    color: #87a1ab;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.showcase-tags {
+    min-height: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 26px;
+}
+
+.showcase-tags span {
+    padding: 6px 8px;
+    border: 1px solid #294651;
+    background: #091218;
+    color: #8ca8b2;
+    font-family: var(--mono);
+    font-size: 11px;
+}
+
+.showcase-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 42px;
+}
+
+.showcase-control {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #294651;
+    background: #101d25;
+    color: var(--cyan-blue);
+    cursor: pointer;
+    transition:
+        border-color 220ms ease,
+        background-color 220ms ease,
+        box-shadow 220ms ease;
+}
+
+.showcase-control:hover {
+    border-color: var(--cyan-blue);
+    background: rgba(77, 231, 255, 0.10);
+    box-shadow: 0 0 18px rgba(77, 231, 255, 0.10);
+}
+
+.showcase-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.showcase-dots button {
+    width: 24px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    background: #294651;
+    cursor: pointer;
+    transition:
+        width 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 280ms ease,
+        box-shadow 280ms ease;
+}
+
+.showcase-dots button.is-active {
+    width: 46px;
+    background: var(--cyan-blue);
+    box-shadow: 0 0 14px rgba(77, 231, 255, 0.18);
+}
+
+.showcase-progress {
+    width: min(360px, 100%);
+    height: 1px;
+    margin-top: 18px;
+    overflow: hidden;
+    background: #20313b;
+}
+
+.showcase-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--cyan-blue);
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.showcase-section.is-playing .showcase-progress span {
+    animation: showcaseProgress 4.5s linear forwards;
+}
+
+@keyframes showcaseProgress {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.showcase-visual {
+    min-width: 0;
+}
+
+.showcase-image-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid #294651;
+    background: #080e13;
+    box-shadow:
+        0 28px 64px rgba(0, 0, 0, 0.34),
+        0 0 42px rgba(77, 231, 255, 0.045);
+}
+
+.showcase-image-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(77, 231, 255, 0.025),
+            transparent 26%,
+            transparent 72%,
+            rgba(11, 17, 23, 0.34)
+        );
+}
+
+.showcase-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    transform: scale(1);
+    filter: saturate(0.84) contrast(1.04);
+    transition:
+        opacity 320ms ease,
+        transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 650ms ease;
+}
+
+.showcase-image-frame.is-changing img {
+    opacity: 0;
+    transform: scale(1.025);
+    filter: saturate(0.55) contrast(1.12);
+}
+
+.showcase-image-meta {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    min-height: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 14px;
+    border-top: 1px solid rgba(77, 231, 255, 0.12);
+    background: rgba(7, 13, 17, 0.88);
+    backdrop-filter: blur(8px);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.showcase-image-meta span {
+    color: #7d98a3;
+}
+
+.showcase-image-meta strong {
+    color: var(--cyan-blue);
+    font-weight: 500;
+}
+
+.showcase-copy.is-changing .showcase-kicker,
+.showcase-copy.is-changing h2,
+.showcase-copy.is-changing > p,
+.showcase-copy.is-changing .showcase-tags {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.showcase-kicker,
+.showcase-copy h2,
+.showcase-copy > p,
+.showcase-tags {
+    transition:
+        opacity 240ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1100px) {
+    .showcase-shell {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 42px;
+    }
+}
+
+@media (max-width: 860px) {
+    .showcase-section {
+        padding: 64px 20px;
+    }
+
+    .showcase-shell {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        gap: 38px;
+    }
+
+    .showcase-copy > p {
+        max-width: 680px;
+    }
+
+    .showcase-image-frame {
+        width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .showcase-copy h2 {
+        font-size: clamp(34px, 10vw, 48px);
+    }
+
+    .showcase-nav {
+        gap: 10px;
+    }
+
+    .showcase-dots {
+        gap: 5px;
+    }
+
+    .showcase-dots button {
+        width: 16px;
+    }
+
+    .showcase-dots button.is-active {
+        width: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .showcase-section.is-playing .showcase-progress span {
+        animation: none !important;
+    }
+
+    .showcase-image-frame img,
+    .showcase-kicker,
+    .showcase-copy h2,
+    .showcase-copy > p,
+    .showcase-tags {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Scroll interaction system
+   --------------------------------------------------------- */
+
+.page-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 100;
+    pointer-events: none;
+    background: transparent;
+}
+
+.page-scroll-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--cyan-blue);
+    box-shadow:
+        0 0 10px rgba(77, 231, 255, 0.50),
+        0 0 22px rgba(77, 231, 255, 0.22);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+}
+
+/*
+ * Major sections enter with a controlled vertical reveal.
+ * The JS adds .is-visible through IntersectionObserver.
+ */
+.scroll-reveal {
+    position: relative;
+}
+
+.scroll-reveal > .section-head,
+.scroll-reveal > .showcase-shell {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.is-visible > .section-head,
+.scroll-reveal.is-visible > .showcase-shell {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero gets a softer opening reveal because it is visible immediately. */
+.hero.scroll-reveal .hero-copy {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 820ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 820ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 420ms ease;
+}
+
+.hero.scroll-reveal.is-visible .hero-copy {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Showcase text and image enter from opposite sides. */
+.scroll-reveal-left,
+.scroll-reveal-right,
+.scroll-reveal-panel {
+    opacity: 0;
+    transition:
+        opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal-left {
+    transform: translateX(-34px);
+}
+
+.scroll-reveal-right {
+    transform: translateX(34px);
+}
+
+.scroll-reveal-panel {
+    transform: translateY(30px) scale(0.992);
+}
+
+.scroll-reveal.is-visible .scroll-reveal-left,
+.scroll-reveal.is-visible .scroll-reveal-right,
+.scroll-reveal.is-visible .scroll-reveal-panel,
+.scroll-reveal-left.is-visible,
+.scroll-reveal-right.is-visible,
+.scroll-reveal-panel.is-visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Table rows appear in sequence instead of all at once. */
+.scroll-stagger > a {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+        color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal.is-visible .scroll-stagger > a,
+.scroll-stagger.is-visible > a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal.is-visible .scroll-stagger > a:nth-child(1),
+.scroll-stagger.is-visible > a:nth-child(1) {
+    transition-delay: 80ms;
+}
+
+.scroll-reveal.is-visible .scroll-stagger > a:nth-child(2),
+.scroll-stagger.is-visible > a:nth-child(2) {
+    transition-delay: 150ms;
+}
+
+.scroll-reveal.is-visible .scroll-stagger > a:nth-child(3),
+.scroll-stagger.is-visible > a:nth-child(3) {
+    transition-delay: 220ms;
+}
+
+.scroll-reveal.is-visible .scroll-stagger > a:nth-child(4),
+.scroll-stagger.is-visible > a:nth-child(4) {
+    transition-delay: 290ms;
+}
+
+/*
+ * A subtle scan line crosses sections as they become visible.
+ * It is deliberately low contrast to avoid looking like a loading animation.
+ */
+.scroll-reveal::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    top: 0;
+    height: 1px;
+    z-index: 5;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(77, 231, 255, 0.75),
+            transparent
+        );
+    opacity: 0;
+}
+
+.scroll-reveal.is-visible::after {
+    animation: sectionScanReveal 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sectionScanReveal {
+    0% {
+        right: 100%;
+        opacity: 0;
+    }
+
+    18% {
+        opacity: 0.72;
+    }
+
+    100% {
+        right: 0;
+        opacity: 0;
+    }
+}
+
+/* Hero background moves only a few pixels for restrained parallax depth. */
+.hero-cfg-background {
+    --hero-scroll-y: 0px;
+    background-position: center calc(50% + var(--hero-scroll-y)) !important;
+    will-change: background-position;
+}
+
+/* Current viewport section gets a very subtle cyan edge in the navbar. */
+.site-nav a.is-current {
+    color: var(--cyan-blue);
+    opacity: 1;
+}
+
+.site-nav a.is-current::after {
+    right: 0;
+    opacity: 1;
+}
+
+@media (max-width: 860px) {
+    .scroll-reveal-left,
+    .scroll-reveal-right {
+        transform: translateY(24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-reveal > .section-head,
+    .scroll-reveal > .showcase-shell,
+    .hero.scroll-reveal .hero-copy,
+    .scroll-reveal-left,
+    .scroll-reveal-right,
+    .scroll-reveal-panel,
+    .scroll-stagger > a {
+        opacity: 1 !important;
+        transform: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+
+    .scroll-reveal.is-visible::after {
+        animation: none !important;
+    }
+
+    .hero-cfg-background {
+        background-position: center center !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Fuzzing Graph card alignment + emphasized stages
+   --------------------------------------------------------- */
+
+/*
+ * All content inside each stage card now starts from the top.
+ * The previous margin-top: auto on the main label pushed it downward.
+ */
+.scripted-flow .flow-step > strong {
+    margin-top: 20px !important;
+}
+
+.scripted-flow .flow-step > p {
+    margin-top: 10px;
+}
+
+.scripted-flow .step-state {
+    margin-top: 16px;
+}
+
+/* Keep only the single ML-ASSISTED tag in MUTATE. */
+.scripted-flow .mutation-tags-single {
+    margin-top: 18px;
+}
+
+.scripted-flow .mutation-tags-single span {
+    display: inline-flex;
+    width: max-content;
+}
+
+/*
+ * Regular cards remain compact.
+ * MUTATE and FEEDBACK share the same top line but extend farther downward.
+ */
+.scripted-flow .flow-track {
+    align-items: start;
+}
+
+.scripted-flow .flow-step {
+    width: 100%;
+    min-height: 264px;
+}
+
+.scripted-flow [data-step="mutation"],
+.scripted-flow [data-step="feedback"] {
+    min-height: 320px;
+}
+
+/* Keep connector lines visually centered against the regular card height. */
+.scripted-flow .flow-connector {
+    align-self: start;
+    height: 264px;
+}
+
+/*
+ * Active transforms should not visually pull the emphasized cards upward.
+ * Their extra height is the emphasis, so only the glow changes.
+ */
+.scripted-flow [data-step="mutation"].is-active,
+.scripted-flow [data-step="feedback"].is-active,
+.scripted-flow [data-step="mutation"].is-feedback-target {
+    transform: none;
+}
+
+/* Preserve the mutation jitter while keeping its top edge anchored. */
+.scripted-flow [data-step="mutation"].is-active {
+    animation-name: mutationCardJitterAnchored;
+}
+
+@keyframes mutationCardJitterAnchored {
+    0% {
+        transform: translateX(0);
+    }
+
+    18% {
+        transform: translateX(1px);
+    }
+
+    20% {
+        transform: translateX(-1px);
+    }
+
+    38% {
+        transform: translateX(0);
+    }
+
+    56% {
+        transform: translateX(1px);
+    }
+
+    58% {
+        transform: translateX(0);
+    }
+
+    76% {
+        transform: translateX(-1px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-track {
+        align-items: stretch;
+    }
+
+    .scripted-flow .flow-step,
+    .scripted-flow [data-step="mutation"],
+    .scripted-flow [data-step="feedback"] {
+        min-height: 220px;
+    }
+
+    .scripted-flow .flow-connector {
+        width: 100%;
+        height: 24px;
+        align-self: stretch;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Direct FEEDBACK -> MUTATE bottom feedback route
+   --------------------------------------------------------- */
+
+.scripted-flow {
+    position: relative;
+}
+
+.scripted-flow .flow-track {
+    position: relative;
+    padding-bottom: 96px;
+}
+
+/*
+ * The dedicated SVG sits over the flow-track coordinate space.
+ * Its path is calculated from the actual FEEDBACK and MUTATE card positions.
+ */
+.feedback-return-route {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 6;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.feedback-return-route-line {
+    fill: none;
+    stroke: rgba(77, 231, 255, 0.22);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.52;
+    transition:
+        stroke 220ms ease,
+        opacity 220ms ease,
+        filter 220ms ease;
+}
+
+.feedback-return-route-pulse {
+    fill: var(--cyan-blue);
+    opacity: 0;
+    filter:
+        drop-shadow(0 0 5px rgba(77, 231, 255, 0.80))
+        drop-shadow(0 0 12px rgba(77, 231, 255, 0.42));
+    transition: opacity 120ms ease;
+}
+
+.feedback-return-route.is-active .feedback-return-route-line {
+    stroke: rgba(77, 231, 255, 0.90);
+    opacity: 1;
+    filter: drop-shadow(0 0 7px rgba(77, 231, 255, 0.24));
+}
+
+.feedback-return-route.is-active .feedback-return-route-pulse {
+    opacity: 1;
+}
+
+.feedback-return-route.is-arrived .feedback-return-route-pulse {
+    opacity: 0;
+}
+
+/*
+ * The old reverse-connector animation is no longer used.
+ * Normal forward connector animation remains unchanged.
+ */
+.scripted-flow .flow-connector.is-return-active .connector-pulse,
+.scripted-flow .flow-connector.is-rapid-return .connector-pulse {
+    animation: none !important;
+    opacity: 0 !important;
+}
+
+/* MUTATE flashes when the direct feedback route arrives. */
+.scripted-flow [data-step="mutation"].is-feedback-target {
+    border-color: var(--cyan-blue);
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.30),
+        0 0 32px rgba(77, 231, 255, 0.20),
+        inset 0 0 0 1px rgba(77, 231, 255, 0.15);
+}
+
+@media (max-width: 720px) {
+    .scripted-flow .flow-track {
+        padding-bottom: 72px;
+    }
+
+    .feedback-return-route-line {
+        stroke-width: 1.5;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feedback-return-route-line {
+        transition-duration: 0.01ms !important;
+    }
+
+    .feedback-return-route-pulse {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   References — six-column link list
+   --------------------------------------------------------- */
+
+.references-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: #0a1117;
+}
+
+.reference-group {
+    min-width: 0;
+    min-height: 190px;
+    padding: 18px 16px 20px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(77, 231, 255, 0.025),
+            transparent 54%
+        ),
+        rgba(15, 23, 30, 0.84);
+}
+
+.reference-group > span {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+}
+
+.reference-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.reference-group li {
+    position: relative;
+    padding-left: 14px;
+    margin: 0 0 12px;
+}
+
+.reference-group li:last-child {
+    margin-bottom: 0;
+}
+
+.reference-group li::before {
+    content: "*";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+}
+
+.reference-group a {
+    color: #9db7c0;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.55;
+    transition:
+        color 220ms ease,
+        text-shadow 220ms ease;
+}
+
+.reference-group a:hover {
+    color: #ecfcff;
+    text-shadow: 0 0 12px rgba(77, 231, 255, 0.24);
+}
+
+@media (max-width: 1180px) {
+    .references-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .references-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reference-group {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .references-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Hero background opacity reduction
+   --------------------------------------------------------- */
+
+.hero-cfg-background {
+    opacity: 0.16 !important;
+}
+
+@media (max-width: 900px) {
+    .hero-cfg-background {
+        opacity: 0.13 !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-cfg-background {
+        opacity: 0.10 !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   References — open six-column layout
+   --------------------------------------------------------- */
+
+/*
+ * Keep References as one continuous surface.
+ * Columns are separated only by spacing, not individual cards/backgrounds.
+ */
+.references-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 52px);
+    padding: 8px 0 4px;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.reference-group {
+    min-width: 0;
+    min-height: 0;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.reference-group > span {
+    margin-bottom: 18px;
+    color: #718b95;
+    font-size: 10px;
+}
+
+/* Small circular bullet instead of an asterisk. */
+.reference-group li {
+    padding-left: 16px;
+    margin-bottom: 11px;
+}
+
+.reference-group li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    left: 1px;
+    top: 0.62em;
+    border-radius: 50%;
+    background: var(--cyan-blue);
+    box-shadow: 0 0 8px rgba(77, 231, 255, 0.24);
+    transform: translateY(-50%);
+}
+
+.reference-group a {
+    color: #9bb2bb;
+    font-size: 12px;
+}
+
+.reference-group a:hover {
+    color: var(--cyan-blue);
+}
+
+@media (max-width: 1180px) {
+    .references-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 36px;
+    }
+}
+
+@media (max-width: 720px) {
+    .references-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .references-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   FEEDBACK ML tag + fixed Showcase dimensions
+   --------------------------------------------------------- */
+
+/* Match the single-tag treatment used by MUTATE. */
+.scripted-flow .feedback-tags-single {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 18px;
+}
+
+.scripted-flow .feedback-tags-single span {
+    display: inline-flex;
+    width: max-content;
+    padding: 5px 7px;
+    border: 1px solid #294651;
+    background: #0b171d;
+    color: var(--cyan-blue);
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+/*
+ * Reserve stable vertical space for Showcase copy.
+ * Text changes no longer resize the section or move navigation controls.
+ */
+.showcase-copy {
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+}
+
+.showcase-index {
+    flex: 0 0 auto;
+}
+
+.showcase-kicker {
+    flex: 0 0 auto;
+    width: max-content;
+}
+
+.showcase-copy h2 {
+    flex: 0 0 auto;
+    min-height: 64px;
+}
+
+.showcase-copy > p {
+    flex: 0 0 auto;
+    min-height: 116px;
+}
+
+.showcase-tags {
+    flex: 0 0 auto;
+    min-height: 34px;
+}
+
+.showcase-nav {
+    margin-top: auto;
+}
+
+.showcase-progress {
+    flex: 0 0 auto;
+}
+
+/*
+ * Keep the outer carousel height stable as well.
+ * The visual column already has a fixed aspect ratio, so this pins copy to it.
+ */
+.showcase-shell {
+    min-height: 620px;
+}
+
+@media (max-width: 860px) {
+    .showcase-copy {
+        min-height: 430px;
+    }
+
+    .showcase-copy h2 {
+        min-height: 58px;
+    }
+
+    .showcase-copy > p {
+        min-height: 112px;
+    }
+
+    .showcase-shell {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .showcase-copy {
+        min-height: 450px;
+    }
+
+    .showcase-copy h2 {
+        min-height: 96px;
+    }
+
+    .showcase-copy > p {
+        min-height: 132px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Fuzzing Graph bottom metadata alignment
+   --------------------------------------------------------- */
+
+/*
+ * Main label and description stay at the top.
+ * The lower state/meta text is anchored to the card bottom.
+ */
+.scripted-flow .flow-step .step-state {
+    margin-top: auto !important;
+}
+
+/*
+ * MUTATE and FEEDBACK have a tag above their lower state text.
+ * Push the tag to the bottom region, then keep the state directly under it.
+ */
+.scripted-flow [data-step="mutation"] .mutation-tags-single,
+.scripted-flow [data-step="feedback"] .feedback-tags-single {
+    margin-top: auto !important;
+    margin-bottom: 0;
+}
+
+.scripted-flow [data-step="mutation"] .step-state,
+.scripted-flow [data-step="feedback"] .step-state {
+    margin-top: 12px !important;
+}
+
+/* Keep the bottom group visually compact and consistently aligned. */
+.scripted-flow [data-step="mutation"] .mutation-tags-single span,
+.scripted-flow [data-step="feedback"] .feedback-tags-single span {
+    line-height: 1.2;
+}
+
+
+/* ---------------------------------------------------------
+   References — developer topic groups
+   --------------------------------------------------------- */
+
+.references-grid-topics {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: clamp(32px, 4vw, 68px) !important;
+}
+
+.references-grid-topics .reference-group {
+    min-width: 0;
+}
+
+.references-grid-topics .reference-group > span {
+    min-height: 32px;
+    line-height: 1.45;
+}
+
+.references-grid-topics .reference-group li {
+    margin-bottom: 12px;
+}
+
+@media (max-width: 980px) {
+    .references-grid-topics {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        row-gap: 38px !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .references-grid-topics {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Navbar typography cleanup
+   --------------------------------------------------------- */
+
+/* Remove HACKED from the navbar entirely. */
+.site-navbar .brand strong,
+.site-nav a {
+    font-family: var(--sans) !important;
+    font-weight: 600;
+}
+
+.site-navbar .brand strong {
+    letter-spacing: 0.025em;
+}
+
+.site-nav a {
+    letter-spacing: 0.045em;
+}
+
+/* ---------------------------------------------------------
+   Project Links
+   --------------------------------------------------------- */
+
+.project-links-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+}
+
+.project-link {
+    min-height: 190px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #0b1117;
+    transition:
+        background-color 240ms ease,
+        box-shadow 240ms ease;
+}
+
+.project-link:hover {
+    background: #0e1b23;
+    box-shadow: inset 0 -2px 0 var(--cyan-blue);
+}
+
+.project-link > i {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 26px;
+    color: var(--cyan-blue);
+    font-size: 17px;
+}
+
+.project-link > span {
+    color: #69838d;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.project-link > strong {
+    margin-top: 8px;
+    color: #d9f6ff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.project-link > small {
+    margin-top: auto;
+    padding-top: 20px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+@media (max-width: 1120px) {
+    .project-links-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .project-links-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------------------------------------------------------
+   References — five development resource groups
+   --------------------------------------------------------- */
+
+.references-grid-five {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: clamp(24px, 3.2vw, 56px) !important;
+}
+
+.references-grid-five .reference-group > span {
+    min-height: 32px;
+    line-height: 1.45;
+}
+
+@media (max-width: 1180px) {
+    .references-grid-five {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .references-grid-five {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .references-grid-five {
+        grid-template-columns: 1fr !important;
+    }
+}

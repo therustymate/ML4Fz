@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#090f14"/>
+    <rect x="18" y="18" width="1244" height="684" rx="4" fill="#0d171e" stroke="#284650"/>
+    <rect x="18" y="18" width="1244" height="48" fill="#111f28"/>
+    <circle cx="42" cy="42" r="5" fill="#4de7ff" opacity=".85"/>
+    <circle cx="62" cy="42" r="5" fill="#365965"/>
+    <circle cx="82" cy="42" r="5" fill="#365965"/>
+    <text x="108" y="47" fill="#9ab5bf" font-family="monospace" font-size="15">ML4Fz / Crash Inspector</text>
+    <text x="1208" y="47" text-anchor="end" fill="#4de7ff" font-family="monospace" font-size="13">TRIAGE</text>
+    
+    <rect x="54" y="102" width="1172" height="214" fill="#0a1117" stroke="#20313b"/>
+    <text x="82" y="140" fill="#4de7ff" font-family="monospace" font-size="14">EXCEPTION CONTEXT</text>
+    <text x="82" y="184" fill="#dff7ff" font-family="monospace" font-size="16">EXCEPTION_ACCESS_VIOLATION</text>
+    <text x="82" y="220" fill="#8da7b0" font-family="monospace" font-size="13">RIP  000000018000141A    RSP  0000008F3D1FF5D0</text>
+    <text x="82" y="252" fill="#8da7b0" font-family="monospace" font-size="13">RAX  4141414141414141    RCX  000001E7B1201000</text>
+    <rect x="54" y="348" width="560" height="304" fill="#091218" stroke="#20313b"/>
+    <text x="82" y="384" fill="#4de7ff" font-family="monospace" font-size="14">STACK SNAPSHOT</text>
+    <text x="82" y="426" fill="#8da7b0" font-family="monospace" font-size="13">+00  4141414141414141</text>
+    <text x="82" y="458" fill="#8da7b0" font-family="monospace" font-size="13">+08  4141414141414141</text>
+    <text x="82" y="490" fill="#dff7ff" font-family="monospace" font-size="13">+10  4242424242424242</text>
+    <text x="82" y="522" fill="#8da7b0" font-family="monospace" font-size="13">+18  0000000180001480</text>
+    <rect x="646" y="348" width="580" height="304" fill="#091218" stroke="#20313b"/>
+    <text x="674" y="384" fill="#4de7ff" font-family="monospace" font-size="14">FAULT CLASSIFICATION</text>
+    <text x="674" y="430" fill="#6f8993" font-family="monospace" font-size="12">stack corruption</text>
+    <rect x="674" y="452" width="474" height="14" fill="#16262e"/>
+    <rect x="674" y="452" width="390" height="14" fill="#4de7ff" opacity=".72"/>
+    <text x="1170" y="465" text-anchor="end" fill="#dff7ff" font-family="monospace" font-size="12">0.82</text>
+    
+</svg>

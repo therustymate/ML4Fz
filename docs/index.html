@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="ML4Fz — ML-assisted extensible Windows DLL fuzzer."
+        />
+        <title>therustymate/ML4Fz</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        />
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+
+    <body>
+        <div class="page-scroll-progress" aria-hidden="true">
+            <span data-page-scroll-progress></span>
+        </div>
+
+        <div class="app-shell">
+            <header class="site-navbar">
+                <a class="brand" href="#top">
+                    <img src="./assets/icon.png" alt="ML4Fz" />
+                    <div>
+                        <span>ML-assisted Windows DLL Fuzzer</span>
+                    </div>
+                </a>
+
+                <nav class="site-nav">
+                    <a href="#overview"><i class="fa-solid fa-crosshairs fa-fw" aria-hidden="true"></i><span>Overview</span></a>
+                    <a href="#showcase"><i class="fa-solid fa-images fa-fw" aria-hidden="true"></i><span>Showcase</span></a>
+                    <a href="#start"><i class="fa-solid fa-terminal fa-fw" aria-hidden="true"></i><span>Getting Started</span></a>
+                    <a href="#pipeline"><i class="fa-solid fa-diagram-project fa-fw" aria-hidden="true"></i><span>Pipeline</span></a>
+                    <a href="#build"><i class="fa-solid fa-link fa-fw" aria-hidden="true"></i><span>Links</span></a>
+                    <a href="#references"><i class="fa-solid fa-book-open fa-fw" aria-hidden="true"></i><span>References</span></a>
+                </nav>
+
+                <a
+                    class="repo-button"
+                    href="https://github.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    <span>GitHub</span>
+                </a>
+            </header>
+
+            <main class="main-view" id="top">
+                <section class="hero scroll-reveal" id="overview" data-scroll-reveal>
+                    <div class="hero-stage">
+                        <div
+                            class="hero-cfg-background"
+                            aria-hidden="true"
+                            style="--cfg-background-image: url('./assets/bg.webp');"
+                        ></div>
+
+                        <div class="hero-copy">
+                            <h1>
+                                ML4Fz
+                                <span>ML-assisted Windows DLL Fuzzer</span>
+                            </h1>
+
+                            <p>
+                                ML4Fz is a ML-assisted extensible Windows DLL fuzzer 
+                                <b>designed to identify <u>potential stack-based buffer overflow 
+                                vulnerabilities</u> in functions in Export Address Table (EAT) 
+                                of the target DLL</b>
+                            </p>
+
+                            <div class="hero-actions">
+                                <a class="button primary" href="#start">
+                                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                                    <span>Get Started</span>
+                                </a>
+
+                                <a class="button" href="#showcase">
+                                    <i class="fa-solid fa-images" aria-hidden="true"></i>
+                                    <span>Showcase</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="showcase-section scroll-reveal" id="showcase" data-showcase data-scroll-reveal>
+                    <div class="showcase-shell">
+                        <div class="showcase-copy scroll-reveal-left" data-scroll-reveal-child>
+                            <div class="showcase-index">
+                                <span data-showcase-index>01</span>
+                                <span>/ 04</span>
+                            </div>
+
+                            <span class="showcase-kicker" data-showcase-kicker>
+                                TARGET SURFACE
+                            </span>
+
+                            <h2 data-showcase-title>Export Discovery</h2>
+
+                            <p data-showcase-description>
+                                Enumerate exported DLL functions and build a clear target
+                                surface before fuzzing begins.
+                            </p>
+
+                            <div class="showcase-tags" data-showcase-tags>
+                                <span>EAT</span>
+                                <span>EXPORTS</span>
+                                <span>TARGET MAP</span>
+                            </div>
+
+                            <div class="showcase-nav" aria-label="Showcase examples">
+                                <button
+                                    class="showcase-control"
+                                    type="button"
+                                    data-showcase-prev
+                                    aria-label="Previous example"
+                                >
+                                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                                </button>
+
+                                <div class="showcase-dots" data-showcase-dots>
+                                    <button
+                                        class="is-active"
+                                        type="button"
+                                        data-showcase-dot="0"
+                                        aria-label="Show example 1"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-showcase-dot="1"
+                                        aria-label="Show example 2"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-showcase-dot="2"
+                                        aria-label="Show example 3"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-showcase-dot="3"
+                                        aria-label="Show example 4"
+                                    ></button>
+                                </div>
+
+                                <button
+                                    class="showcase-control"
+                                    type="button"
+                                    data-showcase-next
+                                    aria-label="Next example"
+                                >
+                                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <div class="showcase-progress" aria-hidden="true">
+                                <span data-showcase-progress></span>
+                            </div>
+                        </div>
+
+                        <div class="showcase-visual scroll-reveal-right" data-scroll-reveal-child>
+                            <div class="showcase-image-frame" data-showcase-frame>
+                                <img
+                                    src="./assets/showcase/export-discovery.svg"
+                                    alt="ML4Fz export discovery example"
+                                    data-showcase-image
+                                />
+
+                                <div class="showcase-image-meta">
+                                    <span data-showcase-image-label>VIEW / EXPORT DISCOVERY</span>
+                                    <strong data-showcase-image-address>0x140001120</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section scroll-reveal" id="start" data-scroll-reveal>
+                    <div class="section-head">
+                        <div>
+                            <span>sub_140001120</span>
+                            <h2>Getting Started</h2>
+                        </div>
+
+                        <p>
+                            Four entry points from project context to the first fuzzing run.
+                        </p>
+                    </div>
+
+                    <div class="analysis-table scroll-stagger" data-scroll-stagger>
+                        <a
+                            href="https://therustymate.com/ML4Fz"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <span class="address">140001120</span>
+                            <span class="type">DOC</span>
+                            <i class="row-icon fa-solid fa-file-code" aria-hidden="true"></i>
+                            <strong>Development Logs</strong>
+                            <small>Project notes, experiments and implementation progress.</small>
+                        </a>
+
+                        <a href="./docs/guide/INSTALL.md">
+                            <span class="address">140001168</span>
+                            <span class="type">DOC</span>
+                            <i class="row-icon fa-solid fa-download" aria-hidden="true"></i>
+                            <strong>Installation</strong>
+                            <small>Install ML4Fz and required dependencies.</small>
+                        </a>
+
+                        <a href="./docs/guide/SETUP.md">
+                            <span class="address">1400011C0</span>
+                            <span class="type">ENV</span>
+                            <i class="row-icon fa-solid fa-sliders" aria-hidden="true"></i>
+                            <strong>Environment Setup</strong>
+                            <small>Configure a controlled Windows fuzzing environment.</small>
+                        </a>
+
+                        <a href="./docs/guide/TUTORIALS.md">
+                            <span class="address">140001228</span>
+                            <span class="type">RUN</span>
+                            <i class="row-icon fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                            <strong>Tutorials</strong>
+                            <small>Walk through the ML4Fz workflow with practical examples.</small>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section scroll-reveal" id="pipeline" data-scroll-reveal>
+                    <div class="section-head">
+                        <div>
+                            <span>sub_140001280</span>
+                            <h2>Fuzzing Graph</h2>
+                        </div>
+
+                        <p>
+                            The graph shows target discovery, seed generation, ML-guided
+                            mutation, execution, triage and feedback as one fuzzing loop.
+                        </p>
+                    </div>
+
+                    <div class="flow-board scripted-flow scroll-reveal-panel" data-flow-sim data-scroll-reveal-child>
+                        <div class="flow-track" role="list" aria-label="Fuzzing process flow">
+                            <article class="flow-step" data-step="discover" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>01</span>
+                                    <small>0x1280</small>
+                                </div>
+
+                                <strong>Discover</strong>
+                                <p>Inspect the EAT function list and identify user-configured fuzzing targets.</p>
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>EAT / target identification</small>
+                                </div>
+                            </article>
+
+                            <div class="flow-connector" data-connector="discover-generate" aria-hidden="true">
+                                <span class="connector-line"></span>
+                                <span class="connector-pulse"></span>
+                            </div>
+
+                            <article class="flow-step" data-step="generate" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-file-circle-plus" aria-hidden="true"></i>02</span>
+                                    <small>0x12B0</small>
+                                </div>
+
+                                <strong>Generate</strong>
+                                <p>Automatically generate seed inputs for the target function or use user-specified seeds.</p>
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>automatic / user seed input</small>
+                                </div>
+                            </article>
+
+                            <div class="flow-connector" data-connector="generate-mutation" aria-hidden="true">
+                                <span class="connector-line"></span>
+                                <span class="connector-pulse"></span>
+                            </div>
+
+                            <article class="flow-step mutation-step" data-step="mutation" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-shuffle" aria-hidden="true"></i>03</span>
+                                    <small>0x12F0</small>
+                                </div>
+
+                                <strong data-glitch="Mutate">Mutate</strong>
+                                <p>
+                                    Use ML to adapt the fuzzing strategy and mutate
+                                    fuzzing data for the selected target.
+                                </p>
+
+                                <div class="mutation-tags mutation-tags-single">
+                                    <span>ML-ASSISTED</span>
+                                </div>
+
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>ML-guided strategy / data mutation</small>
+                                </div>
+                            </article>
+
+                            <div class="flow-connector" data-connector="mutation-execute" aria-hidden="true">
+                                <span class="connector-line"></span>
+                                <span class="connector-pulse"></span>
+                            </div>
+
+                            <article class="flow-step" data-step="execute" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-bolt" aria-hidden="true"></i>04</span>
+                                    <small>0x1340</small>
+                                </div>
+
+                                <strong>Execute</strong>
+                                <p>Provide the fuzzing data to the target function and execute it.</p>
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>target execution</small>
+                                </div>
+                            </article>
+
+                            <div class="flow-connector" data-connector="execute-triage" aria-hidden="true">
+                                <span class="connector-line"></span>
+                                <span class="connector-pulse"></span>
+                            </div>
+
+                            <article class="flow-step" data-step="triage" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-bug" aria-hidden="true"></i>05</span>
+                                    <small>0x13A0</small>
+                                </div>
+
+                                <strong>Triage</strong>
+                                <p>Identify and analyze crash data and branches reached during execution.</p>
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>crash / reached-branch analysis</small>
+                                </div>
+                            </article>
+
+                            <div class="flow-connector" data-connector="triage-feedback" aria-hidden="true">
+                                <span class="connector-line"></span>
+                                <span class="connector-pulse"></span>
+                            </div>
+
+                            <article class="flow-step" data-step="feedback" role="listitem">
+                                <div class="flow-step-head">
+                                    <span><i class="fa-solid fa-rotate-left" aria-hidden="true"></i>06</span>
+                                    <small>0x1380</small>
+                                </div>
+
+                                <strong>Feedback</strong>
+                                <p>Use observed results to provide ML-based feedback for fuzzing strategy and data mutation.</p>
+
+                                <div class="feedback-tags-single">
+                                    <span>ML-ASSISTED</span>
+                                </div>
+
+                                <div class="step-state">
+                                    <span class="state-dot"></span>
+                                    <small>ML strategy / mutation feedback</small>
+                                </div>
+                            </article>
+                        </div>
+
+
+                        <svg
+                            class="feedback-return-route"
+                            data-feedback-return-route
+                            aria-hidden="true"
+                        >
+                            <path
+                                class="feedback-return-route-line"
+                                data-feedback-return-line
+                            ></path>
+                            <circle
+                                class="feedback-return-route-pulse"
+                                data-feedback-return-pulse
+                                r="5"
+                            ></circle>
+                        </svg>
+
+                        <div class="flow-monitor" aria-live="polite">
+                            <div class="monitor-card">
+                                <span>CYCLE</span>
+                                <strong data-cycle-count>001</strong>
+                            </div>
+
+                            <div class="monitor-card monitor-card-wide">
+                                <span>ACTIVE STAGE</span>
+                                <strong data-active-stage>DISCOVER</strong>
+                            </div>
+
+                            <div class="monitor-card monitor-card-wide">
+                                <span>STATUS</span>
+                                <strong data-active-status>Enumerating exported entry points.</strong>
+                            </div>
+
+                            <div class="monitor-card monitor-card-wide">
+                                <span>SIGNALS</span>
+                                <div class="monitor-signals" data-monitor-signals>
+                                    <span>idle</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section scroll-reveal" id="build" data-scroll-reveal>
+                    <div class="section-head">
+                        <div>
+                            <span>sub_140001430</span>
+                            <h2>Project Links</h2>
+                        </div>
+
+                        <p>
+                            Direct links to the project repository, development notes
+                            and usage documentation.
+                        </p>
+                    </div>
+
+                    <div class="project-links-grid scroll-stagger" data-scroll-stagger>
+                        <a
+                            class="project-link"
+                            href="https://github.com/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>Repository</span>
+                            <strong>GitHub Repo</strong>
+                            <small>Source code, issues and project history.</small>
+                        </a>
+
+                        <a
+                            class="project-link"
+                            href="https://therustymate.com/ML4Fz"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <i class="fa-solid fa-code" aria-hidden="true"></i>
+                            <span>Developer</span>
+                            <strong>Development Page</strong>
+                            <small>Development logs, experiments and implementation notes.</small>
+                        </a>
+
+                        <a
+                            class="project-link"
+                            href="./docs/guide/TUTORIALS.md"
+                        >
+                            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                            <span>Guide</span>
+                            <strong>Tutorials</strong>
+                            <small>Step-by-step usage and practical fuzzing workflows.</small>
+                        </a>
+
+                        <a
+                            class="project-link"
+                            href="./docs/guide/INSTALL.md"
+                        >
+                            <i class="fa-solid fa-download" aria-hidden="true"></i>
+                            <span>Setup</span>
+                            <strong>Installation</strong>
+                            <small>Installation requirements and project setup.</small>
+                        </a>
+
+                        <a
+                            class="project-link"
+                            href="./docs/guide/SETUP.md"
+                        >
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                            <span>Environment</span>
+                            <strong>Environment Setup</strong>
+                            <small>Configure the Windows fuzzing environment.</small>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section scroll-reveal" id="references" data-scroll-reveal>
+                    <div class="section-head">
+                        <div>
+                            <span>sub_1400015A0</span>
+                            <h2>References</h2>
+                        </div>
+                    </div>
+
+                                        <div class="references-grid references-grid-five" data-scroll-stagger>
+                        <section class="reference-group">
+                            <span>01 / GITHUB FUZZERS</span>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://github.com/AFLplusplus/AFLplusplus"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        AFL++
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://github.com/googleprojectzero/winafl"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        WinAFL
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://github.com/AFLplusplus/LibAFL"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        LibAFL
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://github.com/google/honggfuzz"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        honggfuzz
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="reference-group">
+                            <span>02 / FUZZER DEVELOPMENT</span>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://www.fuzzingbook.org/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        The Fuzzing Book
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://llvm.org/docs/LibFuzzer.html"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        LLVM libFuzzer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://google.github.io/oss-fuzz/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        OSS-Fuzz Documentation
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="reference-group">
+                            <span>03 / ML DEVELOPMENT &amp; RESEARCH</span>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://pytorch.org/docs/stable/index.html"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        PyTorch Documentation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://scikit-learn.org/stable/user_guide.html"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        scikit-learn User Guide
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://paperswithcode.com/"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Papers with Code
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="reference-group">
+                            <span>04 / COVERAGE DEVELOPMENT</span>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://clang.llvm.org/docs/SanitizerCoverage.html"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        LLVM SanitizerCoverage
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://github.com/DynamoRIO/dynamorio"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        DynamoRIO
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://github.com/googleprojectzero/winafl/blob/master/readme_pt.md"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        WinAFL Intel PT Mode
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="reference-group">
+                            <span>05 / OTHER RESOURCES</span>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="https://learn.microsoft.com/en-us/windows/win32/debug/pe-format"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Microsoft PE Format
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://learn.microsoft.com/en-us/windows/win32/dlls/about-dynamic-link-libraries"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Windows DLL Documentation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://learn.microsoft.com/en-us/cpp/build/x64-calling-convention"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        x64 Calling Convention
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="status-bar">
+                <div>
+                    <span class="status-dot"></span>
+                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Present by @therustymate</strong>
+                </div>
+
+                <div>
+                    <span>
+                        <div id="copyright" align="center"><i class="fa-regular fa-copyright" aria-hidden="true"></i> 2026 ML4Fz - All Rights Reserved.</div>
+                    </span>
+                </div>
+
+                <a
+                    href="https://www.fontspace.com/hacked-font-f28425"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <i class="fa-solid fa-font" aria-hidden="true"></i>
+                    <span>Font credit</span>
+                </a>
+            </footer>
+        </div>
+
+        <script src="./script.js"></script>
+
+        <script>
+            (() => {
+                const copyrightElement = document.getElementById("copyright");
+                copyrightElement.innerHTML = "&copy;  "+new Date().getFullYear()+" ML4Fz - All Rights Reserved.";
+            })();
+        </script>
+    </body>
+</html>

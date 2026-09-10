@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#090f14"/>
+    <rect x="18" y="18" width="1244" height="684" rx="4" fill="#0d171e" stroke="#284650"/>
+    <rect x="18" y="18" width="1244" height="48" fill="#111f28"/>
+    <circle cx="42" cy="42" r="5" fill="#4de7ff" opacity=".85"/>
+    <circle cx="62" cy="42" r="5" fill="#365965"/>
+    <circle cx="82" cy="42" r="5" fill="#365965"/>
+    <text x="108" y="47" fill="#9ab5bf" font-family="monospace" font-size="15">ML4Fz / Feedback Engine</text>
+    <text x="1208" y="47" text-anchor="end" fill="#4de7ff" font-family="monospace" font-size="13">FEEDBACK</text>
+    
+    <rect x="54" y="102" width="1172" height="550" fill="#091218" stroke="#20313b"/>
+    <text x="84" y="140" fill="#4de7ff" font-family="monospace" font-size="14">RUNTIME SIGNALS -> NEXT MUTATION STRATEGY</text>
+    <rect x="90" y="198" width="210" height="92" fill="#101d25" stroke="#294651"/>
+    <rect x="90" y="354" width="210" height="92" fill="#101d25" stroke="#294651"/>
+    <rect x="90" y="510" width="210" height="92" fill="#101d25" stroke="#294651"/>
+    <text x="116" y="234" fill="#4de7ff" font-family="monospace" font-size="12">COVERAGE</text>
+    <text x="116" y="268" fill="#dff7ff" font-family="monospace" font-size="20">+18.7%</text>
+    <text x="116" y="390" fill="#4de7ff" font-family="monospace" font-size="12">CRASH SCORE</text>
+    <text x="116" y="424" fill="#dff7ff" font-family="monospace" font-size="20">0.82</text>
+    <text x="116" y="546" fill="#4de7ff" font-family="monospace" font-size="12">BEHAVIOR</text>
+    <text x="116" y="580" fill="#dff7ff" font-family="monospace" font-size="20">NOVEL</text>
+    <path d="M300 244 H528 M300 400 H528 M300 556 H528" fill="none" stroke="#365965" stroke-width="2"/>
+    <path d="M528 244 V556" fill="none" stroke="#365965" stroke-width="2"/>
+    <path d="M528 400 H696" fill="none" stroke="#4de7ff" stroke-width="3"/>
+    <polygon points="696,400 680,390 680,410" fill="#4de7ff"/>
+    <rect x="722" y="238" width="420" height="324" fill="#0d171e" stroke="#4de7ff" stroke-opacity=".46"/>
+    <text x="752" y="278" fill="#4de7ff" font-family="monospace" font-size="13">UPDATED MUTATION PROFILE</text>
+    <text x="752" y="330" fill="#9bb8c2" font-family="monospace" font-size="13">boundary_weight     0.48</text>
+    <text x="752" y="366" fill="#9bb8c2" font-family="monospace" font-size="13">malformed_weight    0.21</text>
+    <text x="752" y="402" fill="#dff7ff" font-family="monospace" font-size="13">ml_weight           0.31</text>
+    <text x="752" y="456" fill="#6f8993" font-family="monospace" font-size="12">priority target</text>
+    <text x="752" y="492" fill="#4de7ff" font-family="monospace" font-size="18">process_input</text>
+    
+</svg>

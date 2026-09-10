@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#090f14"/>
+    <rect x="18" y="18" width="1244" height="684" rx="4" fill="#0d171e" stroke="#284650"/>
+    <rect x="18" y="18" width="1244" height="48" fill="#111f28"/>
+    <circle cx="42" cy="42" r="5" fill="#4de7ff" opacity=".85"/>
+    <circle cx="62" cy="42" r="5" fill="#365965"/>
+    <circle cx="82" cy="42" r="5" fill="#365965"/>
+    <text x="108" y="47" fill="#9ab5bf" font-family="monospace" font-size="15">ML4Fz / Export Surface</text>
+    <text x="1208" y="47" text-anchor="end" fill="#4de7ff" font-family="monospace" font-size="13">DISCOVER</text>
+    
+    <rect x="54" y="98" width="290" height="558" fill="#091218" stroke="#20313b"/>
+    <text x="78" y="130" fill="#4de7ff" font-family="monospace" font-size="14">EXPORT ADDRESS TABLE</text>
+    <text x="78" y="172" fill="#79939d" font-family="monospace" font-size="13">0x180001020  parse_packet</text>
+    <text x="78" y="204" fill="#79939d" font-family="monospace" font-size="13">0x1800010A0  decode_frame</text>
+    <text x="78" y="236" fill="#dff7ff" font-family="monospace" font-size="13">0x180001130  process_input</text>
+    <rect x="66" y="216" width="250" height="34" fill="#4de7ff" opacity=".07" stroke="#4de7ff" stroke-opacity=".28"/>
+    <text x="78" y="268" fill="#79939d" font-family="monospace" font-size="13">0x180001240  validate_name</text>
+    <text x="78" y="300" fill="#79939d" font-family="monospace" font-size="13">0x180001310  copy_record</text>
+    <rect x="378" y="98" width="848" height="558" fill="#0a1117" stroke="#20313b"/>
+    <text x="410" y="136" fill="#4de7ff" font-family="monospace" font-size="15">process_input</text>
+    <text x="410" y="178" fill="#68838e" font-family="monospace" font-size="13">140001130  push rbp</text>
+    <text x="410" y="210" fill="#98b2bc" font-family="monospace" font-size="13">140001132  mov rbp, rsp</text>
+    <text x="410" y="242" fill="#98b2bc" font-family="monospace" font-size="13">140001139  sub rsp, 80h</text>
+    <text x="410" y="274" fill="#dff7ff" font-family="monospace" font-size="13">140001140  call copy_record</text>
+    <text x="410" y="306" fill="#98b2bc" font-family="monospace" font-size="13">140001145  test eax, eax</text>
+    <text x="410" y="338" fill="#98b2bc" font-family="monospace" font-size="13">140001147  jne short loc_140001168</text>
+    <rect x="404" y="254" width="492" height="34" fill="#4de7ff" opacity=".06" stroke="#4de7ff" stroke-opacity=".26"/>
+    <rect x="944" y="126" width="238" height="142" fill="#101d25" stroke="#294651"/>
+    <text x="970" y="158" fill="#4de7ff" font-family="monospace" font-size="12">TARGET SURFACE</text>
+    <text x="970" y="194" fill="#dff7ff" font-family="monospace" font-size="22">24 exports</text>
+    <text x="970" y="226" fill="#6f8993" font-family="monospace" font-size="12">7 candidates selected</text>
+    
+</svg>

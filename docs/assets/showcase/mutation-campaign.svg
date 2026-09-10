@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#090f14"/>
+    <rect x="18" y="18" width="1244" height="684" rx="4" fill="#0d171e" stroke="#284650"/>
+    <rect x="18" y="18" width="1244" height="48" fill="#111f28"/>
+    <circle cx="42" cy="42" r="5" fill="#4de7ff" opacity=".85"/>
+    <circle cx="62" cy="42" r="5" fill="#365965"/>
+    <circle cx="82" cy="42" r="5" fill="#365965"/>
+    <text x="108" y="47" fill="#9ab5bf" font-family="monospace" font-size="15">ML4Fz / Mutation Engine</text>
+    <text x="1208" y="47" text-anchor="end" fill="#4de7ff" font-family="monospace" font-size="13">MUTATION</text>
+    
+    <rect x="54" y="102" width="760" height="550" fill="#0a1117" stroke="#20313b"/>
+    <text x="82" y="138" fill="#4de7ff" font-family="monospace" font-size="14">CURRENT INPUT</text>
+    <text x="82" y="180" fill="#6f8993" font-family="monospace" font-size="13">41 41 41 41 41 41 41 41  00 20 FF 7F 42 42 42 42</text>
+    <rect x="80" y="214" width="702" height="74" fill="#101d25" stroke="#294651"/>
+    <text x="104" y="246" fill="#9bb8c2" font-family="monospace" font-size="12">boundary splice</text>
+    <text x="104" y="270" fill="#4de7ff" font-family="monospace" font-size="14">len = 256  ->  512  ->  1024</text>
+    <rect x="80" y="316" width="216" height="112" fill="#0c171d" stroke="#4de7ff" stroke-opacity=".45"/>
+    <rect x="322" y="316" width="216" height="112" fill="#0c171d" stroke="#294651"/>
+    <rect x="564" y="316" width="218" height="112" fill="#0c171d" stroke="#294651"/>
+    <text x="104" y="348" fill="#4de7ff" font-family="monospace" font-size="12">BOUNDARY</text>
+    <text x="346" y="348" fill="#78949e" font-family="monospace" font-size="12">MALFORMED</text>
+    <text x="588" y="348" fill="#78949e" font-family="monospace" font-size="12">ML-ASSISTED</text>
+    <text x="104" y="390" fill="#dff7ff" font-family="monospace" font-size="22">42%</text>
+    <text x="346" y="390" fill="#dff7ff" font-family="monospace" font-size="22">33%</text>
+    <text x="588" y="390" fill="#dff7ff" font-family="monospace" font-size="22">25%</text>
+    <rect x="850" y="102" width="376" height="550" fill="#091218" stroke="#20313b"/>
+    <text x="880" y="138" fill="#4de7ff" font-family="monospace" font-size="14">CAMPAIGN SIGNAL</text>
+    <path d="M882 470 C930 430 958 486 1004 418 S1090 352 1128 388 S1188 296 1202 316" fill="none" stroke="#4de7ff" stroke-width="3"/>
+    <line x1="882" y1="510" x2="1202" y2="510" stroke="#20313b"/>
+    <text x="882" y="548" fill="#6f8993" font-family="monospace" font-size="12">new paths / iteration</text>
+    
+</svg>
