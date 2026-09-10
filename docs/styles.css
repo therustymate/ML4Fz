@@ -6180,3 +6180,55 @@ body {
         grid-template-columns: 1fr !important;
     }
 }
+
+
+/* ---------------------------------------------------------
+   Hero background visibility revision
+   --------------------------------------------------------- */
+
+/*
+ * The previous final override used 0.16 opacity, which made bg.webp
+ * difficult to read. Keep it clearly in the background, but visible.
+ */
+.hero-cfg-background {
+    opacity: 0.34 !important;
+    filter:
+        grayscale(0.56)
+        contrast(1.08)
+        brightness(0.82)
+        saturate(0.76) !important;
+}
+
+/*
+ * Retain a center readability mask, but make it lighter than the older
+ * full-window treatment so the screenshot remains recognizable.
+ */
+.hero-stage::before {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(11, 17, 23, 0.05),
+            rgba(11, 17, 23, 0.01) 22%,
+            rgba(11, 17, 23, 0.02) 78%,
+            rgba(11, 17, 23, 0.08)
+        ),
+        radial-gradient(
+            ellipse at center,
+            rgba(11, 17, 23, 0.66) 0%,
+            rgba(11, 17, 23, 0.45) 28%,
+            rgba(11, 17, 23, 0.13) 58%,
+            rgba(11, 17, 23, 0.02) 82%
+        );
+}
+
+@media (max-width: 900px) {
+    .hero-cfg-background {
+        opacity: 0.28 !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .hero-cfg-background {
+        opacity: 0.22 !important;
+    }
+}
