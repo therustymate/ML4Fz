@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+    </head>
+    <body>
+        <div id="content" class="markdown-body">
+# ML4Fz Project Dev Plan
+
+        </div>
+    </body>
+    <script>
+        const contentElement = document.getElementById('content');
+        const markdownText = contentElement.textContent;
+        contentElement.innerHTML = marked.parse(markdownText);
+
+        Array.from(document.links)
+            .filter(link => link.hostname != window.location.hostname)
+            .forEach(link => link.target = '_blank');
+    </script>
+</html>
